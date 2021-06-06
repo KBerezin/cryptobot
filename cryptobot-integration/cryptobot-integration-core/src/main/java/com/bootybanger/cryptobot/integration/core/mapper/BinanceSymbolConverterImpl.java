@@ -17,9 +17,9 @@ public class BinanceSymbolConverterImpl implements BinanceSymbolConverter {
 
     @Override
     public SymbolDTO toSymbolDTO(ExchangeSymbol exchangeSymbol) {
-        SymbolDTO symbolDTO = new SymbolDTO();
-        symbolDTO.setName(exchangeSymbol.getBaseAsset() + "_" + exchangeSymbol.getQuoteAsset());
-        return symbolDTO;
+        //SymbolDTO symbolDTO = new SymbolDTO();
+        //symbolDTO.setName(exchangeSymbol.getBaseAsset() + "_" + exchangeSymbol.getQuoteAsset());
+        return null;
     }
 
     @Override

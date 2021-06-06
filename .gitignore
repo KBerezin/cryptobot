@@ -18,3 +18,11 @@
 /cryptobot-scheduler/cryptobot-scheduler.iml
 /cryptobot-test/cryptobot-test.iml
 /cryptobot-test/cryptobot-test-catalog/cryptobot-test-catalog.iml
+/cryptobot-integration/cryptobot-integration-core/target/classes/com/bootybanger/cryptobot/integration/core/mapper/BinanceSymbolConverterImpl.class
+/cryptobot-microservice/cryptobot-microservice-exchange-integration/target/classes/com/bootybanger/cryptobot/microservice/exchange/integration/ExchangeIntegrationApplication.class
+/cryptobot-microservice/cryptobot-microservice-exchange-integration/target/classes/com/bootybanger/cryptobot/microservice/exchange/integration/config/ExchangeIntegrationApplicationConfig.class
+/cryptobot-integration/cryptobot-integration-core/target/classes/com/bootybanger/cryptobot/integration/core/service/symbol/KuCoinSymbolIntegrationServiceImpl.class
+/cryptobot-common/cryptobot-common-constant/target/classes/com/bootybanger/cryptobot/common/constant/dto/SymbolDTO$SymbolDTOBuilder.class
+/cryptobot-integration/cryptobot-integration-core-domain/target/classes/com/bootybanger/cryptobot/integration/core/domain/mapper/symbol/SymbolMapper.class
+/cryptobot-integration/cryptobot-integration-core/target/classes/com/bootybanger/cryptobot/integration/core/mapper/SymbolMapperImpl.class
+/cryptobot-integration/cryptobot-integration-core/target/classes/com/bootybanger/cryptobot/integration/core/factory/YamlPropertyLoaderFactory.class

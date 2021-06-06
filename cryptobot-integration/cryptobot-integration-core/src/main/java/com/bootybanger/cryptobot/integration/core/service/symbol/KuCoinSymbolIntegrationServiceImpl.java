@@ -2,6 +2,7 @@ package com.bootybanger.cryptobot.integration.core.service.symbol;
 
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.integration.core.domain.mapper.symbol.BinanceSymbolConverter;
+import com.bootybanger.cryptobot.integration.core.domain.mapper.symbol.SymbolMapper;
 import com.bootybanger.cryptobot.integration.core.domain.service.symbol.KuCoinSymbolIntegrationService;
 import com.bootybanger.cryptobot.integration.core.service.symbol.client.KuCoinSymbolClient;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +17,10 @@ public class KuCoinSymbolIntegrationServiceImpl implements KuCoinSymbolIntegrati
 
     private final KuCoinSymbolClient client;
     //TODO сделать свой
-    private final BinanceSymbolConverter converter;
+    private final SymbolMapper mapper;
 
     @Override
     public Mono<List<SymbolDTO>> getAllSymbols() {
-        return client.getKuCoinSymbols().map(converter::toSymbolDTO);
+        return client.getKuCoinSymbols().map(mapper::toSymbolDTO);
     }
 }

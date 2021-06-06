@@ -1,7 +1,6 @@
 package com.bootybanger.cryptobot.integration.core.service.symbol.client;
 
-import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbol;
-import com.bootybanger.cryptobot.common.constant.dto.response.KuCoinSymbolDTOContainer;
+import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
 import com.bootybanger.cryptobot.integration.core.config.KuCoinConfigurationProperties;
 import com.bootybanger.cryptobot.integration.core.service.KuCoinBaseClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,10 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -23,24 +21,37 @@ public class KuCoinSymbolClient {
     private final KuCoinConfigurationProperties properties;
     private final KuCoinBaseClient client;
 
-    public Mono<List<ExchangeSymbol>> getKuCoinSymbols() {
+    public Mono<List<ExchangeSymbolDTO>> getKuCoinSymbols() {
         return client.getClient(properties.getBaseUrl(), new HashMap<>(), new HashMap<>(), String.class,
                 properties.getSymbol().get("getAll"))
-                .map(s -> {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    try {
-                        JsonNode tree = objectMapper.readTree(s);
-                        JsonNode ticker = tree.findValue("ticker");
-                        ticker.forEach(jsonNode -> System.out.println(jsonNode.get("symbol").asText()));
+                .map(this::getExchangeSymbols);
+    }
 
-                    } catch (JsonProcessingException e) {
-                        //TODO логгер
-                        e.printStackTrace();
-                    }
-                    return Arrays.asList(s);
-                })
-                .map(e -> e.stream()
-                        .map(ExchangeSymbol.class::cast)
-                        .collect(Collectors.toList()));
+
+    //TODO srp
+    private List<ExchangeSymbolDTO> getExchangeSymbols(String json) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<ExchangeSymbolDTO> exchangeSymbolDTOList = new ArrayList<>();
+        try {
+            JsonNode tree = objectMapper.readTree(json);
+            JsonNode ticker = tree.findValue("ticker");
+            ticker.forEach(jsonNode -> {
+                String symbol = jsonNode.get("symbol").asText();
+                String[] assets = symbol.split("-");
+                String baseAsset = assets[0];
+                String quoteAsset = assets[1];
+                ExchangeSymbolDTO es = ExchangeSymbolDTO.builder()
+                        .symbol(symbol)
+                        .baseAsset(baseAsset)
+                        .quoteAsset(quoteAsset)
+                        .build();
+                exchangeSymbolDTOList.add(es);
+            });
+
+        } catch (JsonProcessingException e) {
+            //TODO логгер
+            e.printStackTrace();
+        }
+        return exchangeSymbolDTOList;
     }
 }
