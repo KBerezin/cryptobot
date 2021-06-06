@@ -5,9 +5,7 @@ import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 
 import java.util.List;
 
-public interface SymbolMapper {
-    ExchangeSymbolDTO toExchangeDTO(SymbolDTO symbolDTO);
-    List<ExchangeSymbolDTO> toExchangeDTO(List<SymbolDTO> symbolDTO);
+public interface SymbolDTOMapper {
     SymbolDTO toSymbolDTO(ExchangeSymbolDTO exchangeSymbolDTO);
     List<SymbolDTO> toSymbolDTO(List<ExchangeSymbolDTO> exchangeSymbolDTO);
 }

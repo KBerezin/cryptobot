@@ -1,7 +1,7 @@
 package com.bootybanger.cryptobot.integration.core.service.symbol;
 
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
-import com.bootybanger.cryptobot.integration.core.domain.mapper.symbol.SymbolMapper;
+import com.bootybanger.cryptobot.integration.core.domain.mapper.symbol.SymbolDTOMapper;
 import com.bootybanger.cryptobot.integration.core.domain.service.symbol.KuCoinSymbolIntegrationService;
 import com.bootybanger.cryptobot.integration.core.service.symbol.client.KuCoinSymbolClient;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +15,7 @@ import java.util.List;
 public class KuCoinSymbolIntegrationServiceImpl implements KuCoinSymbolIntegrationService {
 
     private final KuCoinSymbolClient client;
-    //TODO сделать свой
-    private final SymbolMapper mapper;
+    private final SymbolDTOMapper mapper;
 
     @Override
     public Mono<List<SymbolDTO>> getAllSymbols() {
