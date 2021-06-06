@@ -1,0 +1,9 @@
+catalog:
+  baseUrl: http://localhost:8081/api/catalog
+  symbol:
+    get: /symbol/get/
+    getList: /symbol/get/list/
+    getAll: /symbol/get/list/all
+    addSingle: /symbol/add/single
+    addList: /symbol/add/list
+    delete: /symbol/delete/

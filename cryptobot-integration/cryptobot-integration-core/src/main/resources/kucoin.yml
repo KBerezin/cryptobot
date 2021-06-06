@@ -1,0 +1,4 @@
+kucoin:
+  baseUrl: https://api.kucoin.com
+  symbol:
+    getAll: /api/v1/market/allTickers

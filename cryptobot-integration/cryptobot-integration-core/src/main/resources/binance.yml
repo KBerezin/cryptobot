@@ -1,0 +1,4 @@
+binance:
+  baseUrl: https://api.binance.com
+  symbol:
+    getAll: /api/v3/exchangeInfo
