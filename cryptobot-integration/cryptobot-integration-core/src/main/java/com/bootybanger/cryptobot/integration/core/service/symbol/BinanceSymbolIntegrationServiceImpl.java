@@ -1,7 +1,7 @@
 package com.bootybanger.cryptobot.integration.core.service.symbol;
 
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
-import com.bootybanger.cryptobot.integration.core.domain.mapper.symbol.BinanceSymbolConverter;
+import com.bootybanger.cryptobot.integration.core.domain.mapper.symbol.SymbolMapper;
 import com.bootybanger.cryptobot.integration.core.domain.service.symbol.BinanceSymbolIntegrationService;
 import com.bootybanger.cryptobot.integration.core.service.symbol.client.BinanceSymbolClient;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.List;
 public class BinanceSymbolIntegrationServiceImpl implements BinanceSymbolIntegrationService {
 
     private final BinanceSymbolClient client;
-    private final BinanceSymbolConverter binanceSymbolConverter;
+    private final SymbolMapper binanceSymbolConverter;
 
     @Override
     public Mono<List<SymbolDTO>> getAllSymbols() {
