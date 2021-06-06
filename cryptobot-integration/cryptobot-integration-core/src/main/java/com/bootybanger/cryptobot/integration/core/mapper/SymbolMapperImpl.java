@@ -31,9 +31,9 @@ public class SymbolMapperImpl implements SymbolMapper {
 
     @Override
     public SymbolDTO toSymbolDTO(ExchangeSymbolDTO exchangeSymbolDTO) {
-        return SymbolDTO.builder()
-                .name(exchangeSymbolDTO.getBaseAsset() + "_" + exchangeSymbolDTO.getQuoteAsset())
-                .build();
+        SymbolDTO symbolDTO = new SymbolDTO();
+        symbolDTO.setName(exchangeSymbolDTO.getBaseAsset() + "_" + exchangeSymbolDTO.getQuoteAsset());
+        return symbolDTO;
     }
 
     @Override
