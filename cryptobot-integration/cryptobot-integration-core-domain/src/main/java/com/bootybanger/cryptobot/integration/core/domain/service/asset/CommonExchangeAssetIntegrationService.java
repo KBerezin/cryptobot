@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.integration.core.domain.service.price;
+package com.bootybanger.cryptobot.integration.core.domain.service.asset;
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import reactor.core.publisher.Mono;

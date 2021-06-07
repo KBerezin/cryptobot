@@ -1,7 +1,6 @@
-package com.bootybanger.cryptobot.integration.core.service.price.client;
+package com.bootybanger.cryptobot.integration.core.service.asset.client;
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
-import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
 import com.bootybanger.cryptobot.integration.core.config.BinanceConfigurationProperties;
@@ -43,12 +42,17 @@ public class BinanceAssetClient extends BaseClient {
                 double bid = assetNode.get("bidPrice").asDouble();
                 double ask = assetNode.get("askPrice").asDouble();
 
-                assetDTOList.add(AssetDTO.builder()
-                        .symbolDTO(new SymbolDTO(null, symbol))
-                        .exchange(CryptoExchange.BINANCE)
-                        .bid(bid)
-                        .ask(ask)
-                        .build());
+                //TODO можно убрать когда появится исключение символов
+                if (bid != 0 && ask != 0) {
+                    assetDTOList.add(AssetDTO.builder()
+                            .symbolDTO(new SymbolDTO(null, symbol))
+                            .exchange(CryptoExchange.BINANCE)
+                            .bid(bid)
+                            .ask(ask)
+                            .build());
+                }
+
+
             });
         } catch (JsonProcessingException e) {
             //TODO логгер

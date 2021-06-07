@@ -1,10 +1,10 @@
-package com.bootybanger.cryptobot.integration.core.service.price;
+package com.bootybanger.cryptobot.integration.core.service.asset;
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
-import com.bootybanger.cryptobot.integration.core.domain.service.price.BinanceAssetIntegrationService;
+import com.bootybanger.cryptobot.integration.core.domain.service.asset.BinanceAssetIntegrationService;
 import com.bootybanger.cryptobot.integration.core.domain.service.symbol.CatalogSymbolIntegrationService;
-import com.bootybanger.cryptobot.integration.core.service.price.client.BinanceAssetClient;
+import com.bootybanger.cryptobot.integration.core.service.asset.client.BinanceAssetClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -27,10 +27,6 @@ public class BinanceAssetIntegrationServiceImpl implements BinanceAssetIntegrati
         return allSymbols.flatMap(symbolDTOList ->
                 binanceAssets.map(binanceAssetList -> binanceAssetList.stream()
                         .filter(asset -> {
-                            //TODO можно заменить когда появится исключение символов
-                            if (asset.getBid() == 0 && asset.getAsk() == 0) {
-                                return false;
-                            }
                             //TODO можно заменить когда будет парсер
                             for (SymbolDTO symbolDTO : symbolDTOList) {
                                 String name = symbolDTO.getName().replaceAll("_", "");
