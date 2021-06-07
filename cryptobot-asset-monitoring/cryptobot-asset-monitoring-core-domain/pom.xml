@@ -6,11 +6,11 @@
 
     <parent>
         <groupId>com.bootybanger</groupId>
-        <artifactId>cryptobot-monitoring</artifactId>
+        <artifactId>cryptobot-asset-monitoring</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>cryptobot-monitoring-core-domain</artifactId>
+    <artifactId>cryptobot-asset-monitoring-core-domain</artifactId>
     <version>${revision}</version>
 
     

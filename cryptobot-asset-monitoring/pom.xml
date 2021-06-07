@@ -10,12 +10,12 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>cryptobot-monitoring</artifactId>
+    <artifactId>cryptobot-asset-monitoring</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>cryptobot-monitoring-api</module>
-        <module>cryptobot-monitoring-core</module>
-        <module>cryptobot-monitoring-core-domain</module>
+        <module>cryptobot-asset-monitoring-api</module>
+        <module>cryptobot-asset-monitoring-core</module>
+        <module>cryptobot-asset-monitoring-core-domain</module>
     </modules>
 </project>

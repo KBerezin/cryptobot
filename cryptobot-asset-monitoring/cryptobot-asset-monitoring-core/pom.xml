@@ -6,26 +6,18 @@
 
     <parent>
         <groupId>com.bootybanger</groupId>
-        <artifactId>cryptobot-monitoring</artifactId>
+        <artifactId>cryptobot-asset-monitoring</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>cryptobot-monitoring-api</artifactId>
+    <artifactId>cryptobot-asset-monitoring-core</artifactId>
     <version>${revision}</version>
 
     <dependencies>
         <dependency>
             <groupId>com.bootybanger</groupId>
-            <artifactId>cryptobot-monitoring-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.bootybanger</groupId>
-            <artifactId>cryptobot-common-constant</artifactId>
+            <artifactId>cryptobot-asset-monitoring-core-domain</artifactId>
         </dependency>
     </dependencies>
-
+    
 </project>

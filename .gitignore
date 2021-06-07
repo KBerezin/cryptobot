@@ -26,5 +26,5 @@
 /cryptobot-integration/cryptobot-integration-core-domain/target/classes/com/bootybanger/cryptobot/integration/core/domain/mapper/symbol/SymbolMapper.class
 /cryptobot-integration/cryptobot-integration-core/target/classes/com/bootybanger/cryptobot/integration/core/mapper/SymbolMapperImpl.class
 /cryptobot-integration/cryptobot-integration-core/target/classes/com/bootybanger/cryptobot/integration/core/factory/YamlPropertyLoaderFactory.class
-/cryptobot-monitoring/cryptobot-monitoring.iml
-/cryptobot-monitoring/cryptobot-monitoring-api/cryptobot-monitoring-api.iml
+/cryptobot-asset-monitoring/cryptobot-asset-monitoring.iml
+/cryptobot-asset-monitoring/cryptobot-asset-monitoring-api/cryptobot-asset-monitoring-api.iml

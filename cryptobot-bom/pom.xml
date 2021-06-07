@@ -93,17 +93,17 @@
             </dependency>
             <dependency>
                 <groupId>com.bootybanger</groupId>
-                <artifactId>cryptobot-monitoring-api</artifactId>
+                <artifactId>cryptobot-asset-monitoring-api</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.bootybanger</groupId>
-                <artifactId>cryptobot-monitoring-core</artifactId>
+                <artifactId>cryptobot-asset-monitoring-core</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.bootybanger</groupId>
-                <artifactId>cryptobot-monitoring-core-domain</artifactId>
+                <artifactId>cryptobot-asset-monitoring-core-domain</artifactId>
                 <version>${revision}</version>
             </dependency>
             <!-- Spring -->
