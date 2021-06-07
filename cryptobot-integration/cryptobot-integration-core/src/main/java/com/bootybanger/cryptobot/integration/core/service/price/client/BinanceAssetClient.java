@@ -1,7 +1,8 @@
 package com.bootybanger.cryptobot.integration.core.service.price.client;
 
-import com.bootybanger.cryptobot.common.constant.dto.ExchangeAssetDTO;
+import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
+import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
 import com.bootybanger.cryptobot.integration.core.config.BinanceConfigurationProperties;
 import com.bootybanger.cryptobot.integration.core.service.BaseClient;
@@ -24,7 +25,7 @@ public class BinanceAssetClient extends BaseClient {
     private final BinanceConfigurationProperties properties;
     private final BinanceBaseClient client;
 
-    public Mono<List<ExchangeAssetDTO>> getBinanceAssets() {
+    public Mono<List<AssetDTO>> getBinanceAssets() {
         return client.getClient(properties.getBaseUrl(), new HashMap<>(), new HashMap<>(),
                 String.class, properties.getAsset().get("getAll"))
                 .map(this::getAssets);
@@ -32,9 +33,9 @@ public class BinanceAssetClient extends BaseClient {
 
 
     //TODO srp
-    private List<ExchangeAssetDTO> getAssets(String json) {
+    private List<AssetDTO> getAssets(String json) {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<ExchangeAssetDTO> assetDTOList = new CopyOnWriteArrayList<>();
+        List<AssetDTO> assetDTOList = new CopyOnWriteArrayList<>();
         try {
             JsonNode assetListNode = objectMapper.readTree(json);
             assetListNode.forEach(assetNode -> {
@@ -42,8 +43,8 @@ public class BinanceAssetClient extends BaseClient {
                 double bid = assetNode.get("bidPrice").asDouble();
                 double ask = assetNode.get("askPrice").asDouble();
 
-                assetDTOList.add(ExchangeAssetDTO.builder()
-                        .exchangeSymbolDTO(ExchangeSymbolDTO.builder().symbol(symbol).build())
+                assetDTOList.add(AssetDTO.builder()
+                        .symbolDTO(new SymbolDTO(null, symbol))
                         .exchange(CryptoExchange.BINANCE)
                         .bid(bid)
                         .ask(ask)
