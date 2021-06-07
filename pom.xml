@@ -26,9 +26,6 @@
         <module>cryptobot-catalog</module>
         <module>cryptobot-microservice</module>
         <module>cryptobot-integration</module>
-        <module>cryptobot-scheduler</module>
-        <module>cryptobot-cache</module>
-        <module>cryptobot-price-handler</module>
         <module>cryptobot-test</module>
     </modules>
 
