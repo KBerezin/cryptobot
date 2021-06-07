@@ -1,0 +1,4 @@
+gate:
+  baseUrl: https://api.gateio.ws/api/v4
+  asset:
+    getAll: /spot/tickers
