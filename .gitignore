@@ -28,3 +28,5 @@
 /cryptobot-integration/cryptobot-integration-core/target/classes/com/bootybanger/cryptobot/integration/core/factory/YamlPropertyLoaderFactory.class
 /cryptobot-asset-monitoring/cryptobot-asset-monitoring.iml
 /cryptobot-asset-monitoring/cryptobot-asset-monitoring-api/cryptobot-asset-monitoring-api.iml
+/cryptobot-asset-monitoring/cryptobot-asset-monitoring-core/cryptobot-asset-monitoring-core.iml
+/cryptobot-asset-monitoring/cryptobot-asset-monitoring-core-domain/cryptobot-asset-monitoring-core-domain.iml
