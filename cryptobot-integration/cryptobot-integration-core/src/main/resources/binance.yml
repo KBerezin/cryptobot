@@ -2,3 +2,5 @@ binance:
   baseUrl: https://api.binance.com
   symbol:
     getAll: /api/v3/exchangeInfo
+  asset:
+    getAll: /api/v3/ticker/bookTicker

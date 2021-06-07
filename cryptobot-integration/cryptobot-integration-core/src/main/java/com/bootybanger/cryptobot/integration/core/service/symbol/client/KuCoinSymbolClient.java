@@ -10,9 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
 @RequiredArgsConstructor
@@ -31,7 +31,7 @@ public class KuCoinSymbolClient {
     //TODO srp
     private List<ExchangeSymbolDTO> getExchangeSymbols(String json) {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<ExchangeSymbolDTO> exchangeSymbolDTOList = new ArrayList<>();
+        List<ExchangeSymbolDTO> exchangeSymbolDTOList = new CopyOnWriteArrayList<>();
         try {
             JsonNode tree = objectMapper.readTree(json);
             JsonNode ticker = tree.findValue("ticker");

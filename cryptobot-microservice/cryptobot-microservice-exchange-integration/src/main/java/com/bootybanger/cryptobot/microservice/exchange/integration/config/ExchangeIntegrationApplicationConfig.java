@@ -1,9 +1,7 @@
 package com.bootybanger.cryptobot.microservice.exchange.integration.config;
 
-import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
-import com.bootybanger.cryptobot.integration.core.domain.service.symbol.BinanceSymbolIntegrationService;
-import com.bootybanger.cryptobot.integration.core.domain.service.symbol.CatalogSymbolIntegrationService;
-import com.bootybanger.cryptobot.integration.core.domain.service.symbol.KuCoinSymbolIntegrationService;
+import com.bootybanger.cryptobot.common.constant.dto.ExchangeAssetDTO;
+import com.bootybanger.cryptobot.integration.core.service.price.client.BinanceAssetClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,20 +17,11 @@ import java.util.List;
 public class ExchangeIntegrationApplicationConfig {
 
     @Autowired
-    CatalogSymbolIntegrationService catalogSymbolIntegrationService;
-
-    @Autowired
-    KuCoinSymbolIntegrationService kuCoinSymbolIntegrationService;
-
-    @Autowired
-    BinanceSymbolIntegrationService binanceSymbolIntegrationService;
+    BinanceAssetClient assetClient;
 
     @PostConstruct
     void init() {
-        Mono<List<SymbolDTO>> allSymbols = kuCoinSymbolIntegrationService.getAllSymbols();
-        allSymbols.subscribe(symbolDTOList -> {
-            System.out.println(symbolDTOList);
-            catalogSymbolIntegrationService.addList(symbolDTOList).subscribe();
-        });
+        Mono<List<ExchangeAssetDTO>> binanceAssets = assetClient.getBinanceAssets();
+        binanceAssets.subscribe(System.out::println);
     }
 }
