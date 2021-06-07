@@ -24,12 +24,11 @@ public class KuCoinSymbolClient {
     public Mono<List<ExchangeSymbolDTO>> getKuCoinSymbols() {
         return client.getClient(properties.getBaseUrl(), new HashMap<>(), new HashMap<>(), String.class,
                 properties.getSymbol().get("getAll"))
-                .map(this::getExchangeSymbols);
+                .map(this::parseKuCoinExchangeSymbolListJson);
     }
 
-
     //TODO srp
-    private List<ExchangeSymbolDTO> getExchangeSymbols(String json) {
+    private List<ExchangeSymbolDTO> parseKuCoinExchangeSymbolListJson(String json) {
         ObjectMapper objectMapper = new ObjectMapper();
         List<ExchangeSymbolDTO> exchangeSymbolDTOList = new CopyOnWriteArrayList<>();
         try {
@@ -47,7 +46,6 @@ public class KuCoinSymbolClient {
                         .build();
                 exchangeSymbolDTOList.add(es);
             });
-
         } catch (JsonProcessingException e) {
             //TODO логгер
             e.printStackTrace();

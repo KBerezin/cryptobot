@@ -1,6 +1,7 @@
 package com.bootybanger.cryptobot.microservice.exchange.integration.config;
 
 import com.bootybanger.cryptobot.integration.core.domain.service.asset.BinanceAssetIntegrationService;
+import com.bootybanger.cryptobot.integration.core.domain.service.asset.KuCoinAssetIntegrationService;
 import com.bootybanger.cryptobot.integration.core.domain.service.symbol.BinanceSymbolIntegrationService;
 import com.bootybanger.cryptobot.integration.core.domain.service.symbol.CatalogSymbolIntegrationService;
 import com.bootybanger.cryptobot.integration.core.domain.service.symbol.KuCoinSymbolIntegrationService;
@@ -23,6 +24,10 @@ public class ExchangeIntegrationApplicationConfig {
     BinanceAssetIntegrationService service;
 
     @Autowired
+    KuCoinAssetIntegrationService service1;
+
+
+    @Autowired
     BinanceSymbolIntegrationService binanceSymbolIntegrationService;
 
     @Autowired
@@ -38,6 +43,7 @@ public class ExchangeIntegrationApplicationConfig {
         allSymbols1.subscribe(l -> catalogSymbolIntegrationService.addList(l).subscribe());
         service.getAllAssets().subscribe(s -> s.forEach(System.out::println));
  */
-        service.getAllAssets().subscribe(s -> s.forEach(System.out::println));
+
+        service1.getAllAssets().subscribe(s -> s.forEach(System.out::println));
     }
 }

@@ -20,4 +20,6 @@ public class KuCoinConfigurationProperties {
     private String baseUrl;
     @NotEmpty
     private Map<String, String> symbol;
+    @NotEmpty
+    private Map<String, String> asset;
 }
