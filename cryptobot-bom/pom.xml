@@ -91,6 +91,21 @@
                 <artifactId>cryptobot-integration-core</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>com.bootybanger</groupId>
+                <artifactId>cryptobot-monitoring-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bootybanger</groupId>
+                <artifactId>cryptobot-monitoring-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bootybanger</groupId>
+                <artifactId>cryptobot-monitoring-core-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
             <!-- Spring -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
