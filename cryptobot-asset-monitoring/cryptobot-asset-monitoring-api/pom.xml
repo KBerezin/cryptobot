@@ -22,10 +22,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.bootybanger</groupId>
-            <artifactId>cryptobot-common-constant</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

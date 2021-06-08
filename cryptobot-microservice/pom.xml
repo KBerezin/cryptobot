@@ -15,6 +15,7 @@
 
     <modules>
         <module>cryptobot-microservice-exchange-integration</module>
+        <module>cryptobot-microservice-asset-monitoring</module>
         <module>cryptobot-microservice-catalog</module>
     </modules>
 

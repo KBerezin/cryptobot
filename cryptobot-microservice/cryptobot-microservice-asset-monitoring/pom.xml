@@ -6,22 +6,20 @@
 
     <parent>
         <groupId>com.bootybanger</groupId>
-        <artifactId>cryptobot-asset-monitoring</artifactId>
+        <artifactId>cryptobot-microservice</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>cryptobot-asset-monitoring-core-domain</artifactId>
+    <artifactId>cryptobot-microservice-asset-monitoring</artifactId>
+    <packaging>jar</packaging>
     <version>${revision}</version>
 
     <dependencies>
         <dependency>
             <groupId>com.bootybanger</groupId>
-            <artifactId>cryptobot-common-constant</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-core</artifactId>
+            <artifactId>cryptobot-asset-monitoring-api</artifactId>
         </dependency>
     </dependencies>
-    
+
+
 </project>
