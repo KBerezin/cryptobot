@@ -39,8 +39,8 @@ public class KuCoinAssetClient extends BaseClient {
             JsonNode ticker = tree.findValue("ticker");
             ticker.forEach(assetNode -> {
                 String symbol = assetNode.get("symbol").asText().replaceAll("-", "_");
-                double bid = assetNode.get("sell").asDouble();
-                double ask = assetNode.get("buy").asDouble();
+                double bid = assetNode.get("buy").asDouble();
+                double ask = assetNode.get("sell").asDouble();
 
                 //TODO можно убрать когда появится исключение символов
                 if (bid != 0 && ask != 0) {

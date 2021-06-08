@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.asset.monitoring.core.domain.service;
+package com.bootybanger.cryptobot.integration.core.domain.service.asset;
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;

@@ -1,5 +1,5 @@
 package com.bootybanger.cryptobot.asset.monitoring.api.controller;
-
+/*
 import com.bootybanger.cryptobot.asset.monitoring.core.domain.service.RealTimeAssetMonitoringService;
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
@@ -30,3 +30,4 @@ public class RealTimeAssetMonitoringController {
         return assetMonitoringService.put(assetDTOList);
     }
 }
+*/
