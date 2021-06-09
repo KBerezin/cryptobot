@@ -12,6 +12,7 @@ import com.bootybanger.cryptobot.integration.core.domain.service.symbol.KuCoinSy
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Scheduled;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
@@ -49,11 +50,7 @@ public class ExchangeIntegrationApplicationConfig {
     void init() {
 /*
 
-        Mono<List<SymbolDTO>> allSymbols1 = kuCoinSymbolIntegrationService.getAllSymbols();
 
-
-        allSymbols.subscribe(l -> catalogSymbolIntegrationService.addList(l).subscribe());
-        allSymbols1.subscribe(l -> catalogSymbolIntegrationService.addList(l).subscribe());
 
         service.getAllAssets().subscribe(s -> s.forEach(System.out::println));
         service3.getAllAssets().subscribe(s -> s.forEach(System.out::println));
@@ -68,7 +65,18 @@ public class ExchangeIntegrationApplicationConfig {
         Mono<Map<SymbolDTO, List<AssetDTO>>> activeAssetMap = facade.getActiveAssetMap();
         activeAssetMap.subscribe(System.out::println);
  */
+        Mono<List<SymbolDTO>> allSymbols = kuCoinSymbolIntegrationService.getAllSymbols();
+        Mono<List<SymbolDTO>> allSymbols1 = binanceSymbolIntegrationService.getAllSymbols();
 
-        service1.getAllAssets().subscribe(s -> s.forEach(System.out::println));
+
+        allSymbols.subscribe(l -> catalogSymbolIntegrationService.addList(l).subscribe());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        allSymbols1.subscribe(l -> catalogSymbolIntegrationService.addList(l).subscribe());
+
     }
+
 }

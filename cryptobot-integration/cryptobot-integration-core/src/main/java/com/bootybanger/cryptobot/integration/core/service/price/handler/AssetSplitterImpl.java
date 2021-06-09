@@ -1,0 +1,49 @@
+package com.bootybanger.cryptobot.integration.core.service.price.handler;
+
+import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
+import com.bootybanger.cryptobot.common.constant.dto.AssetPair;
+import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
+import com.bootybanger.cryptobot.integration.core.domain.service.price.handler.AssetSplitter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
+
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class AssetSplitterImpl implements AssetSplitter {
+    @Override
+    public Mono<Map<SymbolDTO, List<AssetPair>>> split(Mono<Map<SymbolDTO, List<AssetDTO>>> assetMap) {
+        Map<SymbolDTO, List<AssetPair>> result = new ConcurrentHashMap<>();
+        return assetMap.map(symbolDTOListMap -> symbolDTOListMap.values().stream()
+                .map(assetDTOList -> {
+                    List<AssetPair> assetPairs = new CopyOnWriteArrayList<>();
+                    for (int i = 0; i + 1 < assetDTOList.size(); i++) {
+                        AssetPair assetPair = getAssetPair(assetDTOList.get(i), assetDTOList.get(i + 1));
+                        AssetPair assetPair1 = getAssetPair(assetDTOList.get(i + 1), assetDTOList.get(i));
+                        assetPairs.add(assetPair);
+                        assetPairs.add(assetPair1);
+                    }
+                    return assetPairs;
+                }).collect(Collectors.toList()))
+                .map(lists -> {
+                    lists.stream()
+                            .filter(ap -> ap.size() > 0)
+                            .forEach(assetPairs -> result.put(assetPairs.get(0).getAsk().getSymbolDTO(), assetPairs));
+                    return result;
+                });
+    }
+
+    private AssetPair getAssetPair(AssetDTO assetDTO1, AssetDTO assetDTO2) {
+        AssetPair assetPair = new AssetPair();
+        assetPair.setAsk(assetDTO1);
+        assetPair.setBid(assetDTO2);
+        return assetPair;
+    }
+
+}

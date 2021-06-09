@@ -6,6 +6,7 @@ import com.bootybanger.cryptobot.integration.core.domain.service.asset.CommonExc
 import com.bootybanger.cryptobot.integration.core.domain.service.asset.FacadeAssetIntegrationService;
 import com.bootybanger.cryptobot.integration.core.domain.service.asset.RealTimeAssetMonitoringService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -21,6 +22,7 @@ public class FacadeAssetIntegrationServiceImpl implements FacadeAssetIntegration
     private final List<CommonExchangeAssetIntegrationService> assetIntegrationServiceList;
 
     @Override
+    @Scheduled(initialDelay = 500, fixedDelay = 15000)
     public void updateActiveAssetMap() {
         Optional<Mono<List<AssetDTO>>> monoAssetListOptional = assetIntegrationServiceList.stream()
                 .map(CommonExchangeAssetIntegrationService::getAllAssets)
