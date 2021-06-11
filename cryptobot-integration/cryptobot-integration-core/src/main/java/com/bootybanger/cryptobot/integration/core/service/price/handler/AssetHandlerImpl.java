@@ -5,6 +5,7 @@ import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetPair;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.integration.core.domain.service.asset.FacadeAssetIntegrationService;
+import com.bootybanger.cryptobot.integration.core.domain.service.asset.RealTimeAssetMonitoringService;
 import com.bootybanger.cryptobot.integration.core.domain.service.price.handler.ArbitrageWindowFinder;
 import com.bootybanger.cryptobot.integration.core.domain.service.price.handler.AssetHandler;
 import com.bootybanger.cryptobot.integration.core.domain.service.price.handler.AssetSplitter;
@@ -25,6 +26,9 @@ import java.util.stream.Collectors;
 public class AssetHandlerImpl implements AssetHandler {
 
     @Autowired
+    RealTimeAssetMonitoringService realTimeAssetMonitoringService;
+
+    @Autowired
     FacadeAssetIntegrationService facadeAssetIntegrationService;
 
     @Autowired
@@ -36,7 +40,7 @@ public class AssetHandlerImpl implements AssetHandler {
     @Override
     @Scheduled(initialDelay = 10000, fixedDelay = 11000)
     public void handle() {
-        Mono<Map<SymbolDTO, Set<AssetDTO>>> activeAssetMap = facadeAssetIntegrationService.getActiveAssetMap();
+        Mono<Map<SymbolDTO, Set<AssetDTO>>> activeAssetMap = realTimeAssetMonitoringService.getAssetMap();
         activeAssetMap
                 .map(symbolDTOListMap ->
                         symbolDTOListMap.entrySet().stream()
@@ -74,10 +78,11 @@ public class AssetHandlerImpl implements AssetHandler {
         List<String> strings = Arrays.asList(
                 //нет вывода или депозита
                 "CELO_USDT", "ROSE_USDT","BCHA_USDT", "SERO_USDT", "COCOS_USDT",
-                "GRIN_USDT", "GRIN_BTC", "GRIN_ETH", "GAS_BTC", "SUN_USDT",
+                "GRIN_USDT", "GRIN_BTC", "GRIN_ETH", "SUN_USDT",
+                "IOTA_ETH", "LSK_ETH", "IOTA_ETH", "IOTA_USDT", "IOTA_BTC", "", "HOT_USDT", "HOT_ETH",
 
                 //маржинальная хуйня
-                "BTC3L_USDT", "ETH3L_USDT", "VET3L_USDT", "ADA3L_USDT", "LTC3L_USDT",
+                "BTC3L_USDT", "ETH3L_USDT", "VET3L_USDT", "ADA3L_USDT", "LTC3L_USDT", "EOS3L_USDT",
 
                 //высокая комиссия
 
@@ -85,7 +90,7 @@ public class AssetHandlerImpl implements AssetHandler {
                 "BTG_BTC", "BTG_USDT",
 
                 // к битку пока скип коти на кукоине другая сеть
-                "COTI_BTC", "COTI_USDT", "LABS_ETH", "GAS_BTC", "DBC_BTC", "EOS3L_USDT"
+                "COTI_BTC", "COTI_USDT", "LABS_ETH", "GAS_BTC", "DBC_BTC", "DGB_BTC"
 
         );
         return strings.contains(symbolDTO.getName());

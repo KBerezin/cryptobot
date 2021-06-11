@@ -45,8 +45,8 @@ public class HuobiAssetClient {
                 assetDTOList.add(AssetDTO.builder()
                         .symbolDTO(new SymbolDTO(null, symbol))
                         .exchange(CryptoExchange.HUOBI)
-                        .bid(bid)
-                        .ask(ask)
+                        .bestBid(bid)
+                        .bestAsk(ask)
                         .build());
 
             });

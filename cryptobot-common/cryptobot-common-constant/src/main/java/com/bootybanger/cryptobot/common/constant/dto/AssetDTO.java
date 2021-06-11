@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 /**
  * bid - это то, за сколько ты можешь продать.
  * ask - это то за сколько ты можешь купить
@@ -15,10 +17,12 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @Builder
-@EqualsAndHashCode(exclude = {"bid", "ask"})
+@EqualsAndHashCode(exclude = {"bestBid", "bestAsk"})
 public class AssetDTO {
     private SymbolDTO symbolDTO;
     private CryptoExchange exchange;
-    private double bid;
-    private double ask;
+    private List<OrderDTO> bidOrders;
+    private List<OrderDTO> askOrders;
+    private double bestBid;
+    private double bestAsk;
 }

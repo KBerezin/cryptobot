@@ -46,9 +46,9 @@ public class AssetSplitterImpl implements AssetSplitter {
     private AssetPair getAssetPair(AssetDTO assetDTO1, AssetDTO assetDTO2) {
         AssetPair assetPair = new AssetPair();
         assetPair.setSymbolDTO(assetDTO1.getSymbolDTO());
-        assetPair.setAsk(assetDTO1.getAsk());
+        assetPair.setAsk(assetDTO1.getBestAsk());
         assetPair.setAskExchange(assetDTO1.getExchange());
-        assetPair.setBid(assetDTO2.getBid());
+        assetPair.setBid(assetDTO2.getBestBid());
         assetPair.setBidExchange(assetDTO2.getExchange());
         return assetPair;
     }

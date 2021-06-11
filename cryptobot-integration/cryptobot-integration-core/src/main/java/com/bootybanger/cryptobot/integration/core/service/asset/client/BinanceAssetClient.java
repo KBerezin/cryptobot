@@ -4,7 +4,6 @@ import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
 import com.bootybanger.cryptobot.integration.core.config.BinanceConfigurationProperties;
-import com.bootybanger.cryptobot.integration.core.service.BaseClient;
 import com.bootybanger.cryptobot.integration.core.service.BinanceBaseClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -46,8 +45,8 @@ public class BinanceAssetClient {
                     assetDTOList.add(AssetDTO.builder()
                             .symbolDTO(new SymbolDTO(null, symbol))
                             .exchange(CryptoExchange.BINANCE)
-                            .bid(bid)
-                            .ask(ask)
+                            .bestBid(bid)
+                            .bestAsk(ask)
                             .build());
                 }
             });
