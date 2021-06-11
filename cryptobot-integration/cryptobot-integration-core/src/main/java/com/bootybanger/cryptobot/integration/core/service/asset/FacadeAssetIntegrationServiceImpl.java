@@ -13,6 +13,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +23,7 @@ public class FacadeAssetIntegrationServiceImpl implements FacadeAssetIntegration
     private final List<CommonExchangeAssetIntegrationService> assetIntegrationServiceList;
 
     @Override
-    @Scheduled(initialDelay = 500, fixedDelay = 15000)
+    @Scheduled(initialDelay = 500, fixedDelay = 10500)
     public void updateActiveAssetMap() {
         Optional<Mono<List<AssetDTO>>> monoAssetListOptional = assetIntegrationServiceList.stream()
                 .map(CommonExchangeAssetIntegrationService::getAllAssets)
@@ -35,7 +36,7 @@ public class FacadeAssetIntegrationServiceImpl implements FacadeAssetIntegration
     }
 
     @Override
-    public Mono<Map<SymbolDTO, List<AssetDTO>>> getActiveAssetMap() {
+    public Mono<Map<SymbolDTO, Set<AssetDTO>>> getActiveAssetMap() {
         return realTimeAssetMonitoringService.getAssetMap();
     }
 }

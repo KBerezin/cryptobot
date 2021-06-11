@@ -19,7 +19,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
 @RequiredArgsConstructor
-public class KuCoinAssetClient extends BaseClient {
+public class KuCoinAssetClient {
 
     private final KuCoinConfigurationProperties properties;
     private final KuCoinBaseClient client;

@@ -8,8 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(exclude = {"startDateTime", "finishDateTime"})
 public class ArbitrageWindowDTO {
-    private AssetDTO ask;
-    private AssetDTO bid;
+    private AssetPair assetPair;
     private LocalDateTime startDateTime;
     private LocalDateTime finishDateTime;
 }

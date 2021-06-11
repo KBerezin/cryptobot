@@ -7,7 +7,8 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface AssetSplitter {
-    Mono<Map<SymbolDTO, List<AssetPair>>> split(Mono<Map<SymbolDTO, List<AssetDTO>>> assetMap);
+    Mono<Map<SymbolDTO, List<AssetPair>>> split(Mono<Map<SymbolDTO, Set<AssetDTO>>> assetMap);
 }

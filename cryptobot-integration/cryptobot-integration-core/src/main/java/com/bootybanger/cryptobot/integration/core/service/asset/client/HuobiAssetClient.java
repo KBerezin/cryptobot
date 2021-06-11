@@ -3,9 +3,8 @@ package com.bootybanger.cryptobot.integration.core.service.asset.client;
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
-import com.bootybanger.cryptobot.integration.core.config.BinanceConfigurationProperties;
-import com.bootybanger.cryptobot.integration.core.service.BaseClient;
-import com.bootybanger.cryptobot.integration.core.service.BinanceBaseClient;
+import com.bootybanger.cryptobot.integration.core.config.HuobiConfigurationProperties;
+import com.bootybanger.cryptobot.integration.core.service.HuobiBaseClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,37 +18,37 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
 @RequiredArgsConstructor
-public class BinanceAssetClient {
+public class HuobiAssetClient {
 
-    private final BinanceConfigurationProperties properties;
-    private final BinanceBaseClient client;
+    private final HuobiConfigurationProperties properties;
+    private final HuobiBaseClient client;
 
-    public Mono<List<AssetDTO>> getBinanceAssets() {
+    public Mono<List<AssetDTO>> getHuobiAssets() {
         return client.getClient(properties.getBaseUrl(), new HashMap<>(), new HashMap<>(),
                 String.class, properties.getAsset().get("getAll"))
-                .map(this::parseBinanceAssetListJson);
+                .map(this::parseHuobiAssetListJson);
     }
 
     //TODO srp
-    private List<AssetDTO> parseBinanceAssetListJson(String json) {
+    private List<AssetDTO> parseHuobiAssetListJson(String json) {
         ObjectMapper objectMapper = new ObjectMapper();
         List<AssetDTO> assetDTOList = new CopyOnWriteArrayList<>();
         try {
-            JsonNode assetListNode = objectMapper.readTree(json);
-            assetListNode.forEach(assetNode -> {
+            JsonNode tree = objectMapper.readTree(json);
+            JsonNode data = tree.findValue("data");
+            data.forEach(assetNode -> {
                 String symbol = assetNode.get("symbol").asText();
-                double bid = assetNode.get("bidPrice").asDouble();
-                double ask = assetNode.get("askPrice").asDouble();
+                double bid = assetNode.get("bid").asDouble();
+                double ask = assetNode.get("ask").asDouble();
 
                 //TODO можно убрать когда появится исключение символов
-                if (bid != 0 && ask != 0) {
-                    assetDTOList.add(AssetDTO.builder()
-                            .symbolDTO(new SymbolDTO(null, symbol))
-                            .exchange(CryptoExchange.BINANCE)
-                            .bid(bid)
-                            .ask(ask)
-                            .build());
-                }
+                assetDTOList.add(AssetDTO.builder()
+                        .symbolDTO(new SymbolDTO(null, symbol))
+                        .exchange(CryptoExchange.HUOBI)
+                        .bid(bid)
+                        .ask(ask)
+                        .build());
+
             });
         } catch (JsonProcessingException e) {
             //TODO логгер

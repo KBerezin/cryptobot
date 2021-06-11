@@ -19,7 +19,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
 @RequiredArgsConstructor
-public class GateAssetClient extends BaseClient {
+public class GateAssetClient {
 
     private final GateConfigurationProperties properties;
     private final GateBaseClient client;

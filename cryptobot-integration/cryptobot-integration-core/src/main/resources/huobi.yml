@@ -1,0 +1,4 @@
+huobi:
+  baseUrl: https://api.huobi.pro
+  asset:
+    getAll: /market/tickers

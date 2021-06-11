@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,9 +34,9 @@ public class AssetHandlerImpl implements AssetHandler {
     ArbitrageWindowFinder arbitrageWindowFinder;
 
     @Override
-    @Scheduled(initialDelay = 20000, fixedDelay = 120000)
+    @Scheduled(initialDelay = 10000, fixedDelay = 11000)
     public void handle() {
-        Mono<Map<SymbolDTO, List<AssetDTO>>> activeAssetMap = facadeAssetIntegrationService.getActiveAssetMap();
+        Mono<Map<SymbolDTO, Set<AssetDTO>>> activeAssetMap = facadeAssetIntegrationService.getActiveAssetMap();
         activeAssetMap
                 .map(symbolDTOListMap ->
                         symbolDTOListMap.entrySet().stream()
@@ -46,35 +46,51 @@ public class AssetHandlerImpl implements AssetHandler {
         Mono<Map<SymbolDTO, List<ArbitrageWindowDTO>>> windows = arbitrageWindowFinder.findWindows(assetPairMap);
 
         windows.subscribe(symbolDTOListMap -> {
-            System.out.println("------------------СТАРТ-------------------------");
+            System.out.println("-------------------------СТАРТ-------------------------");
             Set<SymbolDTO> symbolDTOS = symbolDTOListMap.keySet();
-            symbolDTOS.stream().forEach(symbolDTO -> {
-
-                ;
-
-
-                List<ArbitrageWindowDTO> arbitrageWindowDTOList = symbolDTOListMap.get(symbolDTO);
-                arbitrageWindowDTOList.forEach(arbitrageWindowDTO -> {
-                    double pctDiff = PriceMath.calculatePriceDifferencePct(arbitrageWindowDTO.getBid().getBid(), arbitrageWindowDTO.getAsk().getAsk());
-
-                    if (pctDiff > 3 && pctDiff < 30) {
-
-                        System.out.println("Symbol: " + symbolDTO.getName());
-                        System.out.println("Можно купить на бирже: " + arbitrageWindowDTO.getAsk().getExchange().name());
-                        System.out.println("ЗА: " + arbitrageWindowDTO.getAsk().getAsk());
-                        System.out.println("Продать на бирже: " + arbitrageWindowDTO.getBid().getExchange());
-                        System.out.println("ЗА: " + arbitrageWindowDTO.getBid().getBid());
-                        System.out.println("Разница в процентах составит: " + pctDiff + "%");
-                        System.out.println(" ");
-                        System.out.println(" ");
-                    }
-                });
-
-
-
+            symbolDTOS.forEach(symbolDTO -> {
+                if(!isExcluded(symbolDTO)) {
+                    List<ArbitrageWindowDTO> arbitrageWindowDTOList = symbolDTOListMap.get(symbolDTO);
+                    arbitrageWindowDTOList.forEach(arbitrageWindowDTO -> {
+                        double pctDiff = PriceMath.calculatePriceDifferencePct(arbitrageWindowDTO.getAssetPair().getBid(), arbitrageWindowDTO.getAssetPair().getAsk());
+                        if (pctDiff > 2 && pctDiff < 90) {
+                            System.out.println("Symbol: " + symbolDTO.getName());
+                            System.out.println("Можно купить на бирже: " + arbitrageWindowDTO.getAssetPair().getAskExchange());
+                            System.out.println("ЗА: " + arbitrageWindowDTO.getAssetPair().getAsk());
+                            System.out.println("Продать на бирже: " + arbitrageWindowDTO.getAssetPair().getBidExchange());
+                            System.out.println("ЗА: " + arbitrageWindowDTO.getAssetPair().getBid());
+                            System.out.println("Разница в процентах составит: " + pctDiff + "%");
+                            System.out.println(" ");
+                            System.out.println(" ");
+                        }
+                    });
+                }
             });
-            System.out.println("------------------STOP-------------------------");
+            System.out.println("-------------------------STOP-------------------------");
         });
     }
 
+    boolean isExcluded(SymbolDTO symbolDTO) {
+        List<String> strings = Arrays.asList(
+                //нет вывода или депозита
+                "CELO_USDT", "ROSE_USDT","BCHA_USDT", "SERO_USDT", "COCOS_USDT",
+                "GRIN_USDT", "GRIN_BTC", "GRIN_ETH", "GAS_BTC", "SUN_USDT",
+
+                //маржинальная хуйня
+                "BTC3L_USDT", "ETH3L_USDT", "VET3L_USDT", "ADA3L_USDT", "LTC3L_USDT",
+
+                //высокая комиссия
+
+                //долгий перевод
+                "BTG_BTC", "BTG_USDT",
+
+                // к битку пока скип коти на кукоине другая сеть
+                "COTI_BTC", "COTI_USDT", "LABS_ETH", "GAS_BTC", "DBC_BTC", "EOS3L_USDT"
+
+        );
+        return strings.contains(symbolDTO.getName());
+    }
 }
+
+// валюты с маленькой комиссией
+// MAHA RFOX KNC ALEPH LSS MTV

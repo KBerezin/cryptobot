@@ -10,6 +10,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
@@ -18,31 +19,37 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AssetSplitterImpl implements AssetSplitter {
     @Override
-    public Mono<Map<SymbolDTO, List<AssetPair>>> split(Mono<Map<SymbolDTO, List<AssetDTO>>> assetMap) {
+    public Mono<Map<SymbolDTO, List<AssetPair>>> split(Mono<Map<SymbolDTO, Set<AssetDTO>>> assetMap) {
         Map<SymbolDTO, List<AssetPair>> result = new ConcurrentHashMap<>();
         return assetMap.map(symbolDTOListMap -> symbolDTOListMap.values().stream()
-                .map(assetDTOList -> {
+                .filter(assetDTOSet -> assetDTOSet.size() > 1)
+                .map(assetDTOSet -> {
+                    List<AssetDTO> assetDTOList = new CopyOnWriteArrayList<>(assetDTOSet);
                     List<AssetPair> assetPairs = new CopyOnWriteArrayList<>();
-                    for (int i = 0; i + 1 < assetDTOList.size(); i++) {
-                        AssetPair assetPair = getAssetPair(assetDTOList.get(i), assetDTOList.get(i + 1));
-                        AssetPair assetPair1 = getAssetPair(assetDTOList.get(i + 1), assetDTOList.get(i));
-                        assetPairs.add(assetPair);
-                        assetPairs.add(assetPair1);
+                    for (int i = 0; i + 1 < assetDTOSet.size(); i++) {
+                        for (int j = i + 1; j < assetDTOSet.size(); j++) {
+                            AssetPair assetPair = getAssetPair(assetDTOList.get(i), assetDTOList.get(j));
+                            AssetPair assetPair1 = getAssetPair(assetDTOList.get(j), assetDTOList.get(i));
+                            assetPairs.add(assetPair);
+                            assetPairs.add(assetPair1);
+                        }
                     }
                     return assetPairs;
-                }).collect(Collectors.toList()))
+                })
+                .collect(Collectors.toList()))
                 .map(lists -> {
-                    lists.stream()
-                            .filter(ap -> ap.size() > 0)
-                            .forEach(assetPairs -> result.put(assetPairs.get(0).getAsk().getSymbolDTO(), assetPairs));
+                    lists.forEach(assetPairs -> result.put(assetPairs.get(0).getSymbolDTO(), assetPairs));
                     return result;
                 });
     }
 
     private AssetPair getAssetPair(AssetDTO assetDTO1, AssetDTO assetDTO2) {
         AssetPair assetPair = new AssetPair();
-        assetPair.setAsk(assetDTO1);
-        assetPair.setBid(assetDTO2);
+        assetPair.setSymbolDTO(assetDTO1.getSymbolDTO());
+        assetPair.setAsk(assetDTO1.getAsk());
+        assetPair.setAskExchange(assetDTO1.getExchange());
+        assetPair.setBid(assetDTO2.getBid());
+        assetPair.setBidExchange(assetDTO2.getExchange());
         return assetPair;
     }
 
