@@ -17,11 +17,11 @@ public class CatalogSymbolIntegrationServiceImpl implements CatalogSymbolIntegra
 
     @Override
     public Mono<List<SymbolDTO>> getAllSymbols() {
-        return client.getAll();
+        return client.getAllSymbols();
     }
 
     @Override
     public Mono<Void> addList(List<SymbolDTO> symbolDTOList) {
-        return client.addList(symbolDTOList);
+        return client.addSymbolList(symbolDTOList);
     }
 }

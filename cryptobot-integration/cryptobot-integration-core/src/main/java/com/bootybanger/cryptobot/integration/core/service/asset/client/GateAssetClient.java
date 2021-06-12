@@ -42,7 +42,7 @@ public class GateAssetClient {
                 //TODO можно убрать когда появится исключение символов
                 if (bid != 0 && ask != 0) {
                     assetDTOList.add(AssetDTO.builder()
-                            .symbolDTO(new SymbolDTO(null, symbol))
+                            .symbolDTO(new SymbolDTO(null, symbol, null))
                             .exchange(CryptoExchange.GATE)
                             .bestBid(bid)
                             .bestAsk(ask)

@@ -1,0 +1,7 @@
+coinmarketcap:
+  baseUrl: https://pro-api.coinmarketcap.com
+  coin:
+    getAll:  /v1/cryptocurrency/map
+
+  headers:
+    X-CMC_PRO_API_KEY: f359f33e-0af3-4672-816d-88727f463ea6

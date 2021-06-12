@@ -43,7 +43,7 @@ public class HuobiAssetClient {
 
                 //TODO можно убрать когда появится исключение символов
                 assetDTOList.add(AssetDTO.builder()
-                        .symbolDTO(new SymbolDTO(null, symbol))
+                        .symbolDTO(new SymbolDTO(null, symbol, null))
                         .exchange(CryptoExchange.HUOBI)
                         .bestBid(bid)
                         .bestAsk(ask)

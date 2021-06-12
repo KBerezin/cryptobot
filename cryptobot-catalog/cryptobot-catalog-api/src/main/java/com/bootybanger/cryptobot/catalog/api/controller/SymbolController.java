@@ -59,7 +59,7 @@ public class SymbolController {
     }
 
     @PostMapping("/add/list")
-    public ResponseEntity<List<SymbolDTO>> addSymbols(@RequestBody List<SymbolDTO> symbols) {
+    public ResponseEntity<Void> addSymbols(@RequestBody List<SymbolDTO> symbols) {
         if (!symbols.isEmpty()) {
             symbolService.addAll(symbols);
         }

@@ -9,6 +9,4 @@ import lombok.ToString;
 @ToString
 public class ExchangeSymbolDTO {
     private final String symbol;
-    private final String baseAsset;
-    private final String quoteAsset;
 }

@@ -7,3 +7,6 @@ catalog:
     addSingle: /symbol/add/single
     addList: /symbol/add/list
     delete: /symbol/delete/
+  coin:
+    getAll: /coin/get/list/all
+    addList: /coin/add/list
