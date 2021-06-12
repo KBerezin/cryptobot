@@ -1,36 +1,32 @@
 package com.bootybanger.cryptobot.integration.core.service.symbol;
 
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
-import com.bootybanger.cryptobot.integration.core.domain.service.symbol.BinanceSymbolIntegrationService;
 import com.bootybanger.cryptobot.integration.core.domain.service.symbol.CatalogSymbolIntegrationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bootybanger.cryptobot.integration.core.domain.service.symbol.CommonExchangeSymbolIntegrationService;
+import com.bootybanger.cryptobot.integration.core.domain.service.symbol.SymbolUpdateService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
-public class SymbolUpdateServiceImpl {
+@Service
+@RequiredArgsConstructor
+public class SymbolUpdateServiceImpl implements SymbolUpdateService {
 
-    @Autowired
-    BinanceSymbolIntegrationService service;
+    private final List<CommonExchangeSymbolIntegrationService> symbolServices;
+    private final CatalogSymbolIntegrationService catalogService;
 
-    @Autowired
-    CatalogSymbolIntegrationService catalogSymbolIntegrationService;
-
+    @Override
     public void updateSymbols() {
-        Mono<List<SymbolDTO>> binanceSymbols = service.getAllSymbols();
-        Mono<List<SymbolDTO>> catalogSymbols = catalogSymbolIntegrationService.getAllSymbols();
-
-        Mono<List<String>> catalogSymbolNames = catalogSymbols.map(symbolDTOList ->
-                symbolDTOList.stream()
-                        .map(SymbolDTO::getName)
-                        .collect(Collectors.toList()));
-
-        Mono<List<SymbolDTO>> exchangeSymbols = catalogSymbolNames
-                .flatMap(names -> binanceSymbols.map(symbolDTOList -> symbolDTOList.stream()
-                        .filter(symbolDTO -> !names.contains(symbolDTO.getName()))
-                        .collect(Collectors.toList())));
-
-        exchangeSymbols.subscribe(symbolDTOList -> catalogSymbolIntegrationService.addList(symbolDTOList).subscribe());
+        Optional<Mono<List<SymbolDTO>>> monoSymbolListOptional = symbolServices.stream()
+                .map(CommonExchangeSymbolIntegrationService::getAllSymbols)
+                .reduce((mono1, mono2) ->
+                        mono1.flatMap(symbolList1 -> mono2.map(symbolList2 -> {
+                            symbolList2.addAll(symbolList1);
+                            return symbolList2;
+                        })));
+        monoSymbolListOptional.ifPresent(mono -> mono.subscribe(symbolDTOList -> catalogService.addList(symbolDTOList).subscribe()));
     }
 }

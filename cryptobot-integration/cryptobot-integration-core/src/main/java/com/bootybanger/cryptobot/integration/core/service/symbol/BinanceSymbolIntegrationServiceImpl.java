@@ -15,11 +15,12 @@ import java.util.List;
 public class BinanceSymbolIntegrationServiceImpl implements BinanceSymbolIntegrationService {
 
     private final BinanceSymbolClient client;
-    private final SymbolDTOMapper binanceSymbolConverter;
+    private final SymbolDTOMapper symbolDTOMapper;
 
     @Override
     public Mono<List<SymbolDTO>> getAllSymbols() {
-        return client.getBinanceSymbols().map(binanceSymbolConverter::toSymbolDTO);
+        return client.getBinanceSymbols()
+                .map(symbolDTOMapper::toSymbolDTO);
     }
 
 }

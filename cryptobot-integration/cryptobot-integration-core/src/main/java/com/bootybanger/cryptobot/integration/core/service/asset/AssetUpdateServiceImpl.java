@@ -2,7 +2,7 @@ package com.bootybanger.cryptobot.integration.core.service.asset;
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.integration.core.domain.service.asset.CommonExchangeAssetIntegrationService;
-import com.bootybanger.cryptobot.integration.core.domain.service.asset.FacadeAssetIntegrationService;
+import com.bootybanger.cryptobot.integration.core.domain.service.asset.AssetUpdateService;
 import com.bootybanger.cryptobot.integration.core.domain.service.asset.RealTimeAssetMonitoringService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class FacadeAssetIntegrationServiceImpl implements FacadeAssetIntegrationService {
+public class AssetUpdateServiceImpl implements AssetUpdateService {
 
     private final RealTimeAssetMonitoringService realTimeAssetMonitoringService;
     private final List<CommonExchangeAssetIntegrationService> assetIntegrationServiceList;

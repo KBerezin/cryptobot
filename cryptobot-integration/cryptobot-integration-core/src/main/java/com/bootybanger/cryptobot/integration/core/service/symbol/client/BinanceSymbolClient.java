@@ -1,8 +1,10 @@
 package com.bootybanger.cryptobot.integration.core.service.symbol.client;
 
 import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
+import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
 import com.bootybanger.cryptobot.integration.core.config.BinanceConfigurationProperties;
 import com.bootybanger.cryptobot.integration.core.service.BinanceBaseClient;
+import com.bootybanger.cryptobot.integration.core.util.ParseUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,46 +14,25 @@ import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
 @RequiredArgsConstructor
 public class BinanceSymbolClient {
 
+    private final ParseUtil parseUtil;
     private final BinanceConfigurationProperties properties;
     private final BinanceBaseClient client;
 
     public Mono<List<ExchangeSymbolDTO>> getBinanceSymbols() {
+        Map<String, String> nodeNameMap = new HashMap<>();
+        nodeNameMap.put("exchangeName", CryptoExchange.BINANCE.name());
+        nodeNameMap.put("listNode", "symbols");
+        nodeNameMap.put("symbolNode", "symbol");
         return client.getClient(properties.getBaseUrl(), new HashMap<>(), new HashMap<>(),
                 String.class, properties.getSymbol().get("getAll"))
-                .map(this::getExchangeSymbols);
+                .map(json -> parseUtil.parseListExchangeSymbols(json, nodeNameMap));
 
-    }
-
-    //TODO srp
-    private List<ExchangeSymbolDTO> getExchangeSymbols(String json) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<ExchangeSymbolDTO> exchangeSymbolDTOList = new CopyOnWriteArrayList<>();
-        try {
-            JsonNode tree = objectMapper.readTree(json);
-            JsonNode symbols = tree.findValue("symbols");
-            symbols.forEach(jsonNode -> {
-                String symbol = jsonNode.get("symbol").asText();
-                String baseAsset = jsonNode.get("baseAsset").asText();
-                String quoteAsset = jsonNode.get("quoteAsset").asText();
-
-                ExchangeSymbolDTO es = ExchangeSymbolDTO.builder()
-                        .symbol(symbol)
-                        .baseAsset(baseAsset)
-                        .quoteAsset(quoteAsset)
-                        .build();
-                exchangeSymbolDTOList.add(es);
-            });
-
-        } catch (JsonProcessingException e) {
-            //TODO логгер
-            e.printStackTrace();
-        }
-        return exchangeSymbolDTOList;
     }
 }

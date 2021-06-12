@@ -7,10 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-//TODO
-/**
- * EqualsAndHashCode уже зайдествован, не менять.
- */
 
 @Data
 @NoArgsConstructor

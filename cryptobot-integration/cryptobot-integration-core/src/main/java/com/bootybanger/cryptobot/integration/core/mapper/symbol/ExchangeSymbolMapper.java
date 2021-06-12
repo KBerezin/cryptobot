@@ -14,9 +14,6 @@ public class ExchangeSymbolMapper {
         String baseAsset = assets[0];
         String quoteAsset = assets[1];
         return ExchangeSymbolDTO.builder()
-                .symbol(symbol)
-                .baseAsset(baseAsset)
-                .quoteAsset(quoteAsset)
                 .build();
     }
 

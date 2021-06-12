@@ -4,7 +4,7 @@ import com.bootybanger.cryptobot.common.constant.dto.ArbitrageWindowDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetPair;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
-import com.bootybanger.cryptobot.integration.core.domain.service.asset.FacadeAssetIntegrationService;
+import com.bootybanger.cryptobot.integration.core.domain.service.asset.AssetUpdateService;
 import com.bootybanger.cryptobot.integration.core.domain.service.asset.RealTimeAssetMonitoringService;
 import com.bootybanger.cryptobot.integration.core.domain.service.price.handler.ArbitrageWindowFinder;
 import com.bootybanger.cryptobot.integration.core.domain.service.price.handler.AssetHandler;
@@ -29,7 +29,7 @@ public class AssetHandlerImpl implements AssetHandler {
     RealTimeAssetMonitoringService realTimeAssetMonitoringService;
 
     @Autowired
-    FacadeAssetIntegrationService facadeAssetIntegrationService;
+    AssetUpdateService facadeAssetIntegrationService;
 
     @Autowired
     AssetSplitter assetSplitter;
@@ -57,8 +57,11 @@ public class AssetHandlerImpl implements AssetHandler {
                     List<ArbitrageWindowDTO> arbitrageWindowDTOList = symbolDTOListMap.get(symbolDTO);
                     arbitrageWindowDTOList.forEach(arbitrageWindowDTO -> {
                         double pctDiff = PriceMath.calculatePriceDifferencePct(arbitrageWindowDTO.getAssetPair().getBid(), arbitrageWindowDTO.getAssetPair().getAsk());
-                        if (pctDiff > 2 && pctDiff < 90) {
+                        if (pctDiff > 2) {
                             System.out.println("Symbol: " + symbolDTO.getName());
+                            System.out.println("RANK: " + symbolDTO.getBaseAsset().getRank());
+                            System.out.println("NET: " + symbolDTO.getBaseAsset().getPlatform());
+                            System.out.println("Name: " + symbolDTO.getBaseAsset().getName());
                             System.out.println("Можно купить на бирже: " + arbitrageWindowDTO.getAssetPair().getAskExchange());
                             System.out.println("ЗА: " + arbitrageWindowDTO.getAssetPair().getAsk());
                             System.out.println("Продать на бирже: " + arbitrageWindowDTO.getAssetPair().getBidExchange());
@@ -81,18 +84,12 @@ public class AssetHandlerImpl implements AssetHandler {
                 "GRIN_USDT", "GRIN_BTC", "GRIN_ETH", "SUN_USDT",
                 "IOTA_ETH", "LSK_ETH", "IOTA_ETH", "IOTA_USDT", "IOTA_BTC", "", "HOT_USDT", "HOT_ETH",
 
-                //маржинальная хуйня
-                "BTC3L_USDT", "ETH3L_USDT", "VET3L_USDT", "ADA3L_USDT", "LTC3L_USDT", "EOS3L_USDT",
+                "BTG_USDT", "COTI_USDT", "COTI_BTC", "BTG_BTC", "GTC_BTC", "TRB_USDT", "PNT_BTC", "STC_USDT", "SUN_BTC", "GTC_USDT", "", "", ""
 
-                //высокая комиссия
 
-                //долгий перевод
-                "BTG_BTC", "BTG_USDT",
 
-                // к битку пока скип коти на кукоине другая сеть
-                "COTI_BTC", "COTI_USDT", "LABS_ETH", "GAS_BTC", "DBC_BTC", "DGB_BTC"
 
-        );
+                );
         return strings.contains(symbolDTO.getName());
     }
 }
