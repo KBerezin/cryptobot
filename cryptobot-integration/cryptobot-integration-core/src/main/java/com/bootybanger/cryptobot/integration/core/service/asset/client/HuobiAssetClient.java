@@ -3,7 +3,7 @@ package com.bootybanger.cryptobot.integration.core.service.asset.client;
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
-import com.bootybanger.cryptobot.integration.core.config.HuobiConfigurationProperties;
+import com.bootybanger.cryptobot.integration.core.config.properties.exchange.HuobiExchangeConfigurationProperties;
 import com.bootybanger.cryptobot.integration.core.service.HuobiBaseClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -20,7 +20,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @RequiredArgsConstructor
 public class HuobiAssetClient {
 
-    private final HuobiConfigurationProperties properties;
+    private final HuobiExchangeConfigurationProperties properties;
     private final HuobiBaseClient client;
 
     public Mono<List<AssetDTO>> getHuobiAssets() {

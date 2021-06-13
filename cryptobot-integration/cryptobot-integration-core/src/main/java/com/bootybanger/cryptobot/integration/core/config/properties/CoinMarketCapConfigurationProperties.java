@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.integration.core.config;
+package com.bootybanger.cryptobot.integration.core.config.properties;
 
 import com.bootybanger.cryptobot.integration.core.factory.YamlPropertyLoaderFactory;
 import jakarta.validation.constraints.NotBlank;
@@ -12,14 +12,15 @@ import org.springframework.context.annotation.PropertySource;
 import java.util.Map;
 
 @Configuration
-@ConfigurationProperties("gate")
-@PropertySource(value = "classpath:gate.yml", factory = YamlPropertyLoaderFactory.class)
-@Setter @Getter
-public class GateConfigurationProperties {
+@ConfigurationProperties("coinmarketcap")
+@PropertySource(value = "classpath:coinmarketcap.yml", factory = YamlPropertyLoaderFactory.class)
+@Setter
+@Getter
+public class CoinMarketCapConfigurationProperties {
     @NotBlank
     private String baseUrl;
     @NotEmpty
-    private Map<String, String> symbol;
+    private Map<String, String> coin;
     @NotEmpty
-    private Map<String, String> asset;
+    private Map<String, String> headers;
 }

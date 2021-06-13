@@ -2,7 +2,7 @@ package com.bootybanger.cryptobot.integration.core.service.symbol.client;
 
 import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
 import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
-import com.bootybanger.cryptobot.integration.core.config.KuCoinConfigurationProperties;
+import com.bootybanger.cryptobot.integration.core.config.properties.exchange.KuCoinExchangeConfigurationProperties;
 import com.bootybanger.cryptobot.integration.core.service.KuCoinBaseClient;
 import com.bootybanger.cryptobot.integration.core.util.ParseUtil;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ import java.util.Map;
 public class KuCoinSymbolClient {
 
     private final ParseUtil parseUtil;
-    private final KuCoinConfigurationProperties properties;
+    private final KuCoinExchangeConfigurationProperties properties;
     private final KuCoinBaseClient client;
 
     public Mono<List<ExchangeSymbolDTO>> getKuCoinSymbols() {

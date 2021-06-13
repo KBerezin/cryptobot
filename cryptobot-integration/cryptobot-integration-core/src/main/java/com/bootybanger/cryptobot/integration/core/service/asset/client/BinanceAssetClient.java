@@ -3,7 +3,7 @@ package com.bootybanger.cryptobot.integration.core.service.asset.client;
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
-import com.bootybanger.cryptobot.integration.core.config.BinanceConfigurationProperties;
+import com.bootybanger.cryptobot.integration.core.config.properties.exchange.BinanceExchangeConfigurationProperties;
 import com.bootybanger.cryptobot.integration.core.service.BinanceBaseClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -20,7 +20,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @RequiredArgsConstructor
 public class BinanceAssetClient {
 
-    private final BinanceConfigurationProperties properties;
+    private final BinanceExchangeConfigurationProperties properties;
     private final BinanceBaseClient client;
 
     public Mono<List<AssetDTO>> getBinanceAssets() {

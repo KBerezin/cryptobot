@@ -1,7 +1,7 @@
 package com.bootybanger.cryptobot.integration.core.service.symbol.coin.client;
 
 import com.bootybanger.cryptobot.common.constant.dto.CoinDTO;
-import com.bootybanger.cryptobot.integration.core.config.CoinMarketCapConfigurationProperties;
+import com.bootybanger.cryptobot.integration.core.config.properties.CoinMarketCapConfigurationProperties;
 import com.bootybanger.cryptobot.integration.core.service.CoinMarketCapBaseClient;
 import com.bootybanger.cryptobot.integration.core.util.ParseUtil;
 import lombok.RequiredArgsConstructor;
