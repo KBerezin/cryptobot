@@ -6,6 +6,7 @@ import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.integration.core.domain.mapper.symbol.SymbolDTOMapper;
 import com.bootybanger.cryptobot.integration.core.domain.service.symbol.CatalogCoinIntegrationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -34,7 +35,8 @@ public class SymbolDTOMapperImpl implements SymbolDTOMapper {
                             .filter(quoteCoin -> symbol.equals(baseCoin.getSymbol() + quoteCoin.getSymbol()))
                             .collect(Collectors.toList());
                     if (quoteCoins.size() > 1) {
-                        System.out.println("symbol " + symbol + " quote " + quoteCoins.toString() +  " basecoin: " + baseCoin.toString());;
+                        throw new RuntimeException("Too many appropriate quote coins: symbol:" + symbol +
+                                " quote " + quoteCoins.toString() +  " basecoin: " + baseCoin.toString());
                     }
                     return quoteCoins.size() == 1;
                 }).collect(Collectors.toList());
@@ -58,7 +60,6 @@ public class SymbolDTOMapperImpl implements SymbolDTOMapper {
                 .collect(Collectors.toList());
     }
 
-    @PostConstruct
     @Override
     public void updateCoins() {
         allCoins = catalogCoinIntegrationService.getList().block();

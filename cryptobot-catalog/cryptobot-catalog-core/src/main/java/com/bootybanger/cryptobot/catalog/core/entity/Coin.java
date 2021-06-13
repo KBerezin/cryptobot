@@ -23,7 +23,7 @@ public class Coin {
     private UUID id;
 
     private String name;
-
+    @Column(unique = true, nullable = false, updatable = false)
     private String symbol;
 
     private Integer rank;

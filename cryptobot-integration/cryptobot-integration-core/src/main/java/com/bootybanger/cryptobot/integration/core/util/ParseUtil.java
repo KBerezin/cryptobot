@@ -67,7 +67,11 @@ public class ParseUtil {
             //TODO логгер
             e.printStackTrace();
         }
-        return coinDTOList.stream().filter(coin -> !handleDuplicates(coin)).collect(Collectors.toList());
+        return coinDTOList.stream()
+                .map(this::handleDuplicates)
+                .map(this::handleMismatchedNames)
+                .filter(coin -> !isExcludedCoin(coin))
+                .collect(Collectors.toList());
     }
 
     public CoinDTO getCoinFromJsonNode(JsonNode coinNode, Map<String, String> nodeNameMap) {
@@ -86,7 +90,18 @@ public class ParseUtil {
         return jsonNode.get(fieldName).asText();
     }
 
-    private boolean handleDuplicates(CoinDTO coinDTO) {
+    private CoinDTO handleMismatchedNames(CoinDTO coinDTO) {
+        Map<String, String> mismatchedNameMap = new HashMap<>();
+        mismatchedNameMap.put("YOYOW", "YOYO");
+        mismatchedNameMap.put("MIOTA", "IOTA");
+        String symbol = mismatchedNameMap.get(coinDTO.getSymbol());
+        if (symbol != null) {
+            coinDTO.setSymbol(symbol);
+        }
+        return coinDTO;
+    }
+
+    private CoinDTO handleDuplicates(CoinDTO coinDTO) {
         Map<String, String> duplicateNameMap = new HashMap<>();
         duplicateNameMap.put("BLOCKIDCOIN", "BID1");
         duplicateNameMap.put("DeFi Bids", "BID2");
@@ -160,8 +175,6 @@ public class ParseUtil {
         duplicateNameMap.put("protocol finance", "PFI1");
         duplicateNameMap.put("Compound Coin", "COMP1");
         duplicateNameMap.put("CCSwap", "CC1");
-        duplicateNameMap.put("Themis", "GET1");
-        duplicateNameMap.put("Gire Token", "GET2");
         duplicateNameMap.put("Sheesha Finance [ERC20]", "SHEESHA1");
         duplicateNameMap.put("ExtStock Token", "XT1");
         duplicateNameMap.put("Basis Dollar", "BSD1");
@@ -218,7 +231,6 @@ public class ParseUtil {
         duplicateNameMap.put("PocketNode", "NODE1");
         duplicateNameMap.put("Profile Utility Token", "PUT1");
         duplicateNameMap.put("FunKeyPay", "FNK1");
-        duplicateNameMap.put("Octree", "OCT1");
         duplicateNameMap.put("Global X Change Token", "GXT1");
         duplicateNameMap.put("OWL", "OWL1");
         duplicateNameMap.put("FEX Token", "FEX1");
@@ -227,7 +239,6 @@ public class ParseUtil {
         duplicateNameMap.put("BOX Token", "BOX1");
         duplicateNameMap.put("DefiBox", "BOX2");
         duplicateNameMap.put("Marblecoin", "MBC1");
-        duplicateNameMap.put("Snowball", "SBT1");
         duplicateNameMap.put("Depth Token", "DEP1");
         duplicateNameMap.put("Billibilli Inc tokenized stock FTX", "BILI1");
         duplicateNameMap.put("Cube", "AUTO1");
@@ -246,7 +257,7 @@ public class ParseUtil {
         duplicateNameMap.put("Bitcoin File", "BIFI2");
         duplicateNameMap.put("LinkToken", "LTK1");
         duplicateNameMap.put("BLOCKCLOUT", "CLOUT1");
-        duplicateNameMap.put("Wisdom Chain", "WDC");
+        duplicateNameMap.put("Wisdom Chain", "WDC1");
         duplicateNameMap.put("StakeCubeCoin", "SCC1");
         duplicateNameMap.put("SiaCashCoin", "SCC2");
         duplicateNameMap.put("StockChain", "SCC3");
@@ -289,7 +300,7 @@ public class ParseUtil {
         duplicateNameMap.put("Exchange Payment Coin", "EXP1");
         duplicateNameMap.put("Oracolxor", "XOR1");
         duplicateNameMap.put("AI Network", "AIN1");
-        duplicateNameMap.put("TENA [new]", "TENA1");
+        duplicateNameMap.put("Tena [new]", "TENA1");
         duplicateNameMap.put("Doraemoon", "DORA1");
         duplicateNameMap.put("Capital.Finance", "CAP1");
         duplicateNameMap.put("VAIOT", "VAI1");
@@ -345,7 +356,7 @@ public class ParseUtil {
         duplicateNameMap.put("NoCapCoin", "NCC1");
         duplicateNameMap.put("Center Prime", "CPX1");
         duplicateNameMap.put("Pfizer tokenized stock Bittrex", "PFE1");
-        duplicateNameMap.put("Voucher", "DVS1");
+        duplicateNameMap.put("Diamond Voucher", "DVS1");
         duplicateNameMap.put("SafeBlast", "BLAST1");
         duplicateNameMap.put("Pegazus finance", "PEG1");
         duplicateNameMap.put("Bitsonic", "BSC1");
@@ -552,7 +563,7 @@ public class ParseUtil {
         duplicateNameMap.put("PHILLIPS PAY COIN", "PPC1");
         duplicateNameMap.put("Wild Ride", "WILD1");
         duplicateNameMap.put("DEMOS", "DOS1");
-        duplicateNameMap.put("BlockStamp", "BST1");
+        duplicateNameMap.put("BlockStamp", "BST+1");
         duplicateNameMap.put("UBU", "UBU1");
         duplicateNameMap.put("Shardus", "ULT1");
         duplicateNameMap.put("Dollar Protocol", "USDF1");
@@ -577,14 +588,18 @@ public class ParseUtil {
         duplicateNameMap.put("Penta", "PNT1");
         duplicateNameMap.put("Token CashPay", "TCP1");
         duplicateNameMap.put("YAM v1", "YAM1");
-
-
-
-
-        return excludedNames.contains(coinDTO.getName());
+        duplicateNameMap.put("Bitget DeFi Token", "BFT1");
+        duplicateNameMap.put("SaltSwap Finance", "SALT1");
+        String alternativeSymbol = duplicateNameMap.get(coinDTO.getName());
+        if(alternativeSymbol != null) {
+            coinDTO.setSymbol(alternativeSymbol);
+        }
+        return coinDTO;
     }
 
-    private boolean isExcludedCoinName() {
-        Arrays.asList("KUN", "QUSD");
+    private boolean isExcludedCoin(CoinDTO coinDTO) {
+        List<String> excludedSymbols = Arrays.asList("KUN", "QUSD", "GET", "OCT", "SBT",
+                "ETH3L", "ETH3S", "BTC3S",  "BTC3L", "BULL", "BEAR");
+        return excludedSymbols.contains(coinDTO.getSymbol());
     }
 }

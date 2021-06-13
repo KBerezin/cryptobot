@@ -9,7 +9,5 @@ import java.util.List;
 public interface SymbolDTOMapper {
     SymbolDTO toSymbolDTO(ExchangeSymbolDTO exchangeSymbolDTO);
     List<SymbolDTO> toSymbolDTO(List<ExchangeSymbolDTO> exchangeSymbolDTO);
-
-    @PostConstruct
     void updateCoins();
 }

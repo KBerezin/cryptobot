@@ -82,7 +82,7 @@ public class AssetHandlerImpl implements AssetHandler {
                 //нет вывода или депозита
                 "CELO_USDT", "ROSE_USDT","BCHA_USDT", "SERO_USDT", "COCOS_USDT",
                 "GRIN_USDT", "GRIN_BTC", "GRIN_ETH", "SUN_USDT",
-                "IOTA_ETH", "LSK_ETH", "IOTA_ETH", "IOTA_USDT", "IOTA_BTC", "", "HOT_USDT", "HOT_ETH",
+                "LSK_ETH", "HOT_USDT", "HOT_ETH",
 
                 "BTG_USDT", "COTI_USDT", "COTI_BTC", "BTG_BTC", "GTC_BTC", "TRB_USDT", "PNT_BTC", "STC_USDT", "SUN_BTC", "GTC_USDT", "", "", ""
 

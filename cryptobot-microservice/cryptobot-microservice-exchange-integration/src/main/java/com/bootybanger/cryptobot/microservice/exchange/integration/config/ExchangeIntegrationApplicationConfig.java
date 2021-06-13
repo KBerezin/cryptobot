@@ -67,8 +67,14 @@ public class ExchangeIntegrationApplicationConfig {
     SymbolUpdateService symbolUpdateService;
 
     @PostConstruct
-    void init() {
+    void init() throws InterruptedException {
         coinUpdateService.updateCoins();
+        Thread.sleep(10000);
+        symbolUpdateService.updateSymbols();
+        symbolDTOMapper.updateCoins();
+
+
+
     }
 
 }
