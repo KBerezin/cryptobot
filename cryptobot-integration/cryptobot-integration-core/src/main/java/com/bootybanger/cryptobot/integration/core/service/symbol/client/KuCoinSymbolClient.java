@@ -1,33 +1,17 @@
 package com.bootybanger.cryptobot.integration.core.service.symbol.client;
 
-import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
-import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
-import com.bootybanger.cryptobot.integration.core.config.properties.exchange.KuCoinExchangeConfigurationProperties;
-import com.bootybanger.cryptobot.common.integration.client.KuCoinBaseClient;
-import com.bootybanger.cryptobot.integration.core.util.ParseUtilImpl;
-import lombok.RequiredArgsConstructor;
+import com.bootybanger.cryptobot.common.integration.client.BaseClient;
+import com.bootybanger.cryptobot.integration.core.domain.config.SymbolProperties;
+import com.bootybanger.cryptobot.integration.core.domain.service.symbol.AbstractExchangeSymbolClient;
+import com.bootybanger.cryptobot.integration.core.domain.util.SymbolParseUtil;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Component
-@RequiredArgsConstructor
-public class KuCoinSymbolClient {
-
-    private final ParseUtilImpl parseUtil;
-    private final KuCoinExchangeConfigurationProperties properties;
-    private final KuCoinBaseClient client;
-
-    public Mono<List<ExchangeSymbolDTO>> getKuCoinSymbols() {
-        Map<String, String> nodeNameMap = new HashMap<>();
-        nodeNameMap.put("exchangeName", CryptoExchange.KUCOIN.name());
-        nodeNameMap.put("listNode", "ticker");
-        nodeNameMap.put("symbolNode", "symbol");
-        return client.getClient(properties.getBaseUrl(), new HashMap<>(), new HashMap<>(), String.class,
-                properties.getSymbol().get("getAll"))
-                .map(json -> parseUtil.parseListExchangeSymbols(json, nodeNameMap));
+public class KuCoinSymbolClient extends AbstractExchangeSymbolClient {
+    public KuCoinSymbolClient(@Qualifier("kuCoinParseUtil") SymbolParseUtil parseUtil,
+                              @Qualifier("kuCoinExchangeConfigurationProperties") SymbolProperties symbolProperties,
+                              @Qualifier("kuCoinBaseClient") BaseClient client) {
+        super(parseUtil, symbolProperties, client);
     }
 }

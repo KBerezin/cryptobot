@@ -19,6 +19,6 @@ public class KuCoinSymbolIntegrationServiceImpl implements KuCoinSymbolIntegrati
 
     @Override
     public Mono<List<SymbolDTO>> getAllSymbols() {
-        return client.getKuCoinSymbols().map(mapper::toSymbolDTO);
+        return client.getExchangeSymbols().map(mapper::toSymbolDTO);
     }
 }
