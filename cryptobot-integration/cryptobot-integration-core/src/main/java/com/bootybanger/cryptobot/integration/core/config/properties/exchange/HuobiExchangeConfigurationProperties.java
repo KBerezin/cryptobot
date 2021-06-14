@@ -1,6 +1,6 @@
 package com.bootybanger.cryptobot.integration.core.config.properties.exchange;
 
-import com.bootybanger.cryptobot.integration.core.domain.config.properties.exchange.AbstractGeneralExchangeConfigurationProperties;
+import com.bootybanger.cryptobot.integration.core.domain.config.AbstractGeneralExchangeConfigurationProperties;
 import com.bootybanger.cryptobot.integration.core.factory.YamlPropertyLoaderFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

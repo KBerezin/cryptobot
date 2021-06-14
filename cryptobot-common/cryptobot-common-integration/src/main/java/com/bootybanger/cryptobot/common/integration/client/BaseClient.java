@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.integration.core.service;
+package com.bootybanger.cryptobot.common.integration.client;
 
 import jakarta.validation.constraints.NotNull;
 import org.springframework.core.ParameterizedTypeReference;

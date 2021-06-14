@@ -1,7 +1,7 @@
 package com.bootybanger.cryptobot.integration.core.service.symbol;
 
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
-import com.bootybanger.cryptobot.integration.core.domain.mapper.symbol.SymbolDTOMapper;
+import com.bootybanger.cryptobot.integration.core.domain.mapper.SymbolDTOMapper;
 import com.bootybanger.cryptobot.integration.core.domain.service.symbol.KuCoinSymbolIntegrationService;
 import com.bootybanger.cryptobot.integration.core.service.symbol.client.KuCoinSymbolClient;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.integration.core.domain.config.properties.exchange;
+package com.bootybanger.cryptobot.integration.core.domain.config;
 
 public interface GeneralExchangeProperties extends SymbolProperties, AssetProperties {
 }

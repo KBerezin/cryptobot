@@ -4,7 +4,7 @@ import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
 import com.bootybanger.cryptobot.integration.core.config.properties.exchange.GateConfigurationProperties;
-import com.bootybanger.cryptobot.integration.core.service.GateBaseClient;
+import com.bootybanger.cryptobot.common.integration.client.GateBaseClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

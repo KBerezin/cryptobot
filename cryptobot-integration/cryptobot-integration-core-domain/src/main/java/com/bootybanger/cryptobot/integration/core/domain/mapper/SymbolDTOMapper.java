@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.integration.core.domain.mapper.symbol;
+package com.bootybanger.cryptobot.integration.core.domain.mapper;
 
 import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;

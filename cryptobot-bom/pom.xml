@@ -68,6 +68,11 @@
             </dependency>
             <dependency>
                 <groupId>com.bootybanger</groupId>
+                <artifactId>cryptobot-common-integration</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bootybanger</groupId>
                 <artifactId>cryptobot-catalog-api</artifactId>
                 <version>${revision}</version>
             </dependency>

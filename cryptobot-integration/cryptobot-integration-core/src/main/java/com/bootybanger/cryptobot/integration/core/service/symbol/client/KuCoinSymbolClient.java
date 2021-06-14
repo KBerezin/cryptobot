@@ -3,8 +3,8 @@ package com.bootybanger.cryptobot.integration.core.service.symbol.client;
 import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
 import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
 import com.bootybanger.cryptobot.integration.core.config.properties.exchange.KuCoinExchangeConfigurationProperties;
-import com.bootybanger.cryptobot.integration.core.service.KuCoinBaseClient;
-import com.bootybanger.cryptobot.integration.core.util.ParseUtil;
+import com.bootybanger.cryptobot.common.integration.client.KuCoinBaseClient;
+import com.bootybanger.cryptobot.integration.core.util.ParseUtilImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
@@ -17,7 +17,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class KuCoinSymbolClient {
 
-    private final ParseUtil parseUtil;
+    private final ParseUtilImpl parseUtil;
     private final KuCoinExchangeConfigurationProperties properties;
     private final KuCoinBaseClient client;
 

@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.integration.core.util;
+package com.bootybanger.cryptobot.integration.core.domain.util;
 
 import com.bootybanger.cryptobot.common.constant.dto.CoinDTO;
 import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
@@ -6,8 +6,6 @@ import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Getter;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,12 +14,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Component
-@Getter
-public class ParseUtil {
-
+public abstract class AbstractParseUtil implements ParseUtil {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    @Override
     public List<ExchangeSymbolDTO> parseListExchangeSymbols(String json, Map<String, String> nodeNameMap) {
         List<ExchangeSymbolDTO> exchangeSymbolDTOList = new ArrayList<>();
         try {
@@ -38,22 +34,7 @@ public class ParseUtil {
         return exchangeSymbolDTOList;
     }
 
-    private ExchangeSymbolDTO getExchangeSymbolFromJsonNode(JsonNode jsonNode, Map<String, String> nodeNameMap) {
-        String symbolName = jsonNode.get(nodeNameMap.get("symbolNode")).asText("");
-        String symbol = handleSymbolName(symbolName, nodeNameMap.get("exchangeName"));
-        return ExchangeSymbolDTO.builder().symbol(symbol).build();
-    }
-
-    private String handleSymbolName(String symbolName, String exchangeName) {
-        CryptoExchange cryptoExchange = CryptoExchange.valueOf(exchangeName);
-        switch (cryptoExchange) {
-            case KUCOIN:
-                return symbolName.replace("-", "");
-            default:
-                return symbolName;
-        }
-    }
-
+    @Override
     public List<CoinDTO> parseListCoins(String json, Map<String, String> nodeNameMap) {
         List<CoinDTO> coinDTOList = new ArrayList<>();
         try {
@@ -74,7 +55,7 @@ public class ParseUtil {
                 .collect(Collectors.toList());
     }
 
-    public CoinDTO getCoinFromJsonNode(JsonNode coinNode, Map<String, String> nodeNameMap) {
+    private CoinDTO getCoinFromJsonNode(JsonNode coinNode, Map<String, String> nodeNameMap) {
         String name = coinNode.get(nodeNameMap.get("nameNode")).asText("");
         String symbol = coinNode.get(nodeNameMap.get("symbolNode")).asText("");
         Integer rank = coinNode.get(nodeNameMap.get("rankNode")).asInt(-1);
@@ -83,11 +64,27 @@ public class ParseUtil {
                 .build();
     }
 
-    public String getNodeFieldAsString(JsonNode jsonNode, String fieldName) {
+    private String getNodeFieldAsString(JsonNode jsonNode, String fieldName) {
         if (jsonNode == null || jsonNode.get(fieldName) == null) {
             return "";
         }
         return jsonNode.get(fieldName).asText();
+    }
+
+    private ExchangeSymbolDTO getExchangeSymbolFromJsonNode(JsonNode jsonNode, Map<String, String> nodeNameMap) {
+        String symbolName = jsonNode.get(nodeNameMap.get("symbolNode")).asText("");
+        String symbol = handleSymbolName(symbolName, nodeNameMap.get("exchangeName"));
+        return ExchangeSymbolDTO.builder().symbol(symbol).build();
+    }
+
+    private String handleSymbolName(String symbolName, String exchangeName) {
+        CryptoExchange cryptoExchange = CryptoExchange.valueOf(exchangeName);
+        switch (cryptoExchange) {
+            case KUCOIN:
+                return symbolName.replace("-", "");
+            default:
+                return symbolName;
+        }
     }
 
     private CoinDTO handleMismatchedNames(CoinDTO coinDTO) {
@@ -591,7 +588,7 @@ public class ParseUtil {
         duplicateNameMap.put("Bitget DeFi Token", "BFT1");
         duplicateNameMap.put("SaltSwap Finance", "SALT1");
         String alternativeSymbol = duplicateNameMap.get(coinDTO.getName());
-        if(alternativeSymbol != null) {
+        if (alternativeSymbol != null) {
             coinDTO.setSymbol(alternativeSymbol);
         }
         return coinDTO;
@@ -599,7 +596,7 @@ public class ParseUtil {
 
     private boolean isExcludedCoin(CoinDTO coinDTO) {
         List<String> excludedSymbols = Arrays.asList("KUN", "QUSD", "GET", "OCT", "SBT",
-                "ETH3L", "ETH3S", "BTC3S",  "BTC3L", "BULL", "BEAR");
+                "ETH3L", "ETH3S", "BTC3S", "BTC3L", "BULL", "BEAR");
         return excludedSymbols.contains(coinDTO.getSymbol());
     }
 }

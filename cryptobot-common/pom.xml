@@ -15,6 +15,7 @@
 
     <modules>
         <module>cryptobot-common-constant</module>
+        <module>cryptobot-common-integration</module>
     </modules>
 
 </project>
