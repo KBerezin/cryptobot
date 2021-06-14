@@ -3,8 +3,9 @@ package com.bootybanger.cryptobot.integration.core.service.asset;
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.integration.core.domain.service.asset.HuobiIntegrationService;
-import com.bootybanger.cryptobot.integration.core.domain.service.symbol.CatalogSymbolIntegrationService;
+
 import com.bootybanger.cryptobot.integration.core.service.asset.client.HuobiAssetClient;
+import core.service.catalog.CatalogSymbolIntegrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;

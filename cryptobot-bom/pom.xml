@@ -86,6 +86,19 @@
                 <artifactId>cryptobot-catalog-core-domain</artifactId>
                 <version>${revision}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.bootybanger</groupId>
+                <artifactId>cryptobot-integration-symbol-core-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bootybanger</groupId>
+                <artifactId>cryptobot-integration-symbol-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- К УДАЛЕНИЮ -->
             <dependency>
                 <groupId>com.bootybanger</groupId>
                 <artifactId>cryptobot-integration-core-domain</artifactId>
@@ -111,6 +124,9 @@
                 <artifactId>cryptobot-asset-monitoring-core-domain</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <!-- К УДАЛЕНИЮ -->
+
+
             <!-- Spring -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

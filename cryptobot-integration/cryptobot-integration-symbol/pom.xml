@@ -6,19 +6,16 @@
 
     <parent>
         <groupId>com.bootybanger</groupId>
-        <artifactId>cryptobot</artifactId>
+        <artifactId>cryptobot-integration</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>cryptobot-integration</artifactId>
+    <artifactId>cryptobot-integration-symbol</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>cryptobot-integration-symbol</module>
-        <module>cryptobot-integration-api</module>
-        <module>cryptobot-integration-api-domain</module>
-        <module>cryptobot-integration-core</module>
-        <module>cryptobot-integration-core-domain</module>
+        <module>cryptobot-integration-symbol-core</module>
+        <module>cryptobot-integration-symbol-core-domain</module>
     </modules>
 
 </project>
