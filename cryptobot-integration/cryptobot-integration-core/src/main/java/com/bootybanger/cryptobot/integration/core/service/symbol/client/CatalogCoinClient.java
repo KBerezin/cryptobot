@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.integration.core.service.symbol.coin.client;
+package com.bootybanger.cryptobot.integration.core.service.symbol.client;
 
 import com.bootybanger.cryptobot.common.constant.dto.CoinDTO;
 import com.bootybanger.cryptobot.integration.core.config.properties.CatalogConfigurationProperties;

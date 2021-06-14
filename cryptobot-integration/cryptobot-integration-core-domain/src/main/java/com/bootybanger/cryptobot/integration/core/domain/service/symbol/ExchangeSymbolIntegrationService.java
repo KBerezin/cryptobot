@@ -5,6 +5,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-public interface CommonExchangeSymbolIntegrationService {
+public interface ExchangeSymbolIntegrationService {
     Mono<List<SymbolDTO>> getAllSymbols();
 }

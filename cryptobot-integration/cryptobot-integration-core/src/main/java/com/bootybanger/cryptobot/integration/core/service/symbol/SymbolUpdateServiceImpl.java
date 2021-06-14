@@ -2,7 +2,7 @@ package com.bootybanger.cryptobot.integration.core.service.symbol;
 
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.integration.core.domain.service.symbol.CatalogSymbolIntegrationService;
-import com.bootybanger.cryptobot.integration.core.domain.service.symbol.CommonExchangeSymbolIntegrationService;
+import com.bootybanger.cryptobot.integration.core.domain.service.symbol.ExchangeSymbolIntegrationService;
 import com.bootybanger.cryptobot.integration.core.domain.service.symbol.SymbolUpdateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,13 +15,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SymbolUpdateServiceImpl implements SymbolUpdateService {
 
-    private final List<CommonExchangeSymbolIntegrationService> symbolServices;
+    private final List<ExchangeSymbolIntegrationService> symbolServices;
     private final CatalogSymbolIntegrationService catalogService;
 
     @Override
     public void updateSymbols() {
         Optional<Mono<List<SymbolDTO>>> monoSymbolListOptional = symbolServices.stream()
-                .map(CommonExchangeSymbolIntegrationService::getAllSymbols)
+                .map(ExchangeSymbolIntegrationService::getAllSymbols)
                 .reduce((mono1, mono2) ->
                         mono1.flatMap(symbolList1 -> mono2.map(symbolList2 -> {
                             symbolList2.addAll(symbolList1);

@@ -1,10 +1,20 @@
 package com.bootybanger.cryptobot.integration.core.domain.service.symbol;
 
-import com.bootybanger.cryptobot.common.integration.service.AbstractIntegrationService;
-import com.bootybanger.cryptobot.common.integration.client.BaseClient;
+import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
+import com.bootybanger.cryptobot.integration.core.domain.mapper.SymbolDTOMapper;
+import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
 
-public abstract class AbstractSymbolIntegrationService extends AbstractIntegrationService {
-    public AbstractSymbolIntegrationService(BaseClient client) {
-        super(client);
+import java.util.List;
+
+@RequiredArgsConstructor
+public abstract class AbstractSymbolIntegrationService implements ExchangeSymbolIntegrationService {
+    private final ExchangeSymbolClient client;
+    private final SymbolDTOMapper symbolDTOMapper;
+
+    @Override
+    public Mono<List<SymbolDTO>> getAllSymbols() {
+        return client.getExchangeSymbols()
+                .map(symbolDTOMapper::toSymbolDTO);
     }
 }

@@ -2,7 +2,7 @@ package com.bootybanger.cryptobot.integration.core.service.symbol.coin;
 
 import com.bootybanger.cryptobot.common.constant.dto.CoinDTO;
 import com.bootybanger.cryptobot.integration.core.domain.service.symbol.CatalogCoinIntegrationService;
-import com.bootybanger.cryptobot.integration.core.service.symbol.coin.client.CatalogCoinClient;
+import com.bootybanger.cryptobot.integration.core.service.symbol.client.CatalogCoinClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;

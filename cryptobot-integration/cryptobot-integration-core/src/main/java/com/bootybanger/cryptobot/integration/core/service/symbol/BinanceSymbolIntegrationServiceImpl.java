@@ -1,26 +1,15 @@
 package com.bootybanger.cryptobot.integration.core.service.symbol;
 
-import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.integration.core.domain.mapper.SymbolDTOMapper;
-import com.bootybanger.cryptobot.integration.core.domain.service.symbol.BinanceSymbolIntegrationService;
-import com.bootybanger.cryptobot.integration.core.service.symbol.client.BinanceSymbolClient;
-import lombok.RequiredArgsConstructor;
+import com.bootybanger.cryptobot.integration.core.domain.service.symbol.AbstractSymbolIntegrationService;
+import com.bootybanger.cryptobot.integration.core.domain.service.symbol.ExchangeSymbolClient;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
-
-import java.util.List;
 
 @Service
-@RequiredArgsConstructor
-public class BinanceSymbolIntegrationServiceImpl implements BinanceSymbolIntegrationService {
-
-    private final BinanceSymbolClient client;
-    private final SymbolDTOMapper symbolDTOMapper;
-
-    @Override
-    public Mono<List<SymbolDTO>> getAllSymbols() {
-        return client.getExchangeSymbols()
-                .map(symbolDTOMapper::toSymbolDTO);
+public class BinanceSymbolIntegrationServiceImpl extends AbstractSymbolIntegrationService {
+    public BinanceSymbolIntegrationServiceImpl(@Qualifier("binanceSymbolClient") ExchangeSymbolClient client,
+                                               SymbolDTOMapper symbolDTOMapper) {
+        super(client, symbolDTOMapper);
     }
-
 }
