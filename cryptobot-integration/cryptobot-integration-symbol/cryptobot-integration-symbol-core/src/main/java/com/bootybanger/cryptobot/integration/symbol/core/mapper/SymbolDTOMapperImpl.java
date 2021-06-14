@@ -27,9 +27,6 @@ public class SymbolDTOMapperImpl implements SymbolDTOMapper {
     private List<CoinDTO> allCoins;
     @Override
     public SymbolDTO toSymbolDTO(ExchangeSymbolDTO exchangeSymbolDTO) {
-
-        //TODO
-
         String symbol = exchangeSymbolDTO.getSymbol();
         List<CoinDTO> baseCoins = allCoins.stream()
                 .filter(baseCoin -> symbol.startsWith(baseCoin.getSymbol()))
@@ -63,6 +60,7 @@ public class SymbolDTOMapperImpl implements SymbolDTOMapper {
                 .collect(Collectors.toList());
     }
 
+    //TODO
     @Override
     @PostConstruct
     public void update() {
