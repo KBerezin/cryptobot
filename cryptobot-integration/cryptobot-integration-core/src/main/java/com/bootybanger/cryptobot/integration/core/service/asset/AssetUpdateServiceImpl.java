@@ -1,6 +1,7 @@
 package com.bootybanger.cryptobot.integration.core.service.asset;
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
+import com.bootybanger.cryptobot.common.constant.dto.ExchangeAssetDTO;
 import com.bootybanger.cryptobot.integration.core.domain.service.asset.CommonExchangeAssetIntegrationService;
 import com.bootybanger.cryptobot.integration.core.domain.service.asset.AssetUpdateService;
 import com.bootybanger.cryptobot.integration.core.domain.service.asset.RealTimeAssetMonitoringService;

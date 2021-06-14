@@ -1,7 +1,7 @@
 package com.bootybanger.cryptobot.integration.core.service.asset.client;
 
-import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
-import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
+import com.bootybanger.cryptobot.common.constant.dto.ExchangeAssetDTO;
+import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
 import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
 import com.bootybanger.cryptobot.common.integration.client.HuobiBaseClient;
 import com.bootybanger.cryptobot.integration.symbol.core.config.HuobiExchangeConfigurationProperties;
@@ -23,27 +23,27 @@ public class HuobiAssetClient {
     private final HuobiExchangeConfigurationProperties properties;
     private final HuobiBaseClient client;
 
-    public Mono<List<AssetDTO>> getHuobiAssets() {
+    public Mono<List<ExchangeAssetDTO>> getHuobiAssets() {
         return client.getClient(properties.getBaseUrl(), new HashMap<>(), new HashMap<>(),
                 String.class, properties.getAsset().get("getAll"))
                 .map(this::parseHuobiAssetListJson);
     }
 
     //TODO srp
-    private List<AssetDTO> parseHuobiAssetListJson(String json) {
+    private List<ExchangeAssetDTO> parseHuobiAssetListJson(String json) {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<AssetDTO> assetDTOList = new CopyOnWriteArrayList<>();
+        List<ExchangeAssetDTO> exchangeAssetDTOList = new CopyOnWriteArrayList<>();
         try {
             JsonNode tree = objectMapper.readTree(json);
             JsonNode data = tree.findValue("data");
             data.forEach(assetNode -> {
-                String symbol = assetNode.get("symbol").asText();
+                String symbol = assetNode.get("symbol").asText().toUpperCase();
                 double bid = assetNode.get("bid").asDouble();
                 double ask = assetNode.get("ask").asDouble();
 
                 //TODO можно убрать когда появится исключение символов
-                assetDTOList.add(AssetDTO.builder()
-                        .symbolDTO(new SymbolDTO(null, symbol, null))
+                exchangeAssetDTOList.add(ExchangeAssetDTO.builder()
+                        .exchangeSymbolDTO(ExchangeSymbolDTO.builder().symbol(symbol).build())
                         .exchange(CryptoExchange.HUOBI)
                         .bestBid(bid)
                         .bestAsk(ask)
@@ -54,6 +54,6 @@ public class HuobiAssetClient {
             //TODO логгер
             e.printStackTrace();
         }
-        return assetDTOList;
+        return exchangeAssetDTOList;
     }
 }

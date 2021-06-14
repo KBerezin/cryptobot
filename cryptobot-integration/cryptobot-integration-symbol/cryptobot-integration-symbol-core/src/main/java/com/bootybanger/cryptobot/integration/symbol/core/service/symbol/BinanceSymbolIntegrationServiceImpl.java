@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BinanceSymbolIntegrationServiceImpl extends AbstractSymbolIntegrationService {
     public BinanceSymbolIntegrationServiceImpl(@Qualifier("binanceSymbolClient") ExchangeSymbolClient client,
-                                               SymbolDTOMapper symbolDTOMapper) {
+                                               @Qualifier("symbolDTOToSaveMapperImpl") SymbolDTOMapper symbolDTOMapper) {
         super(client, symbolDTOMapper);
     }
 }

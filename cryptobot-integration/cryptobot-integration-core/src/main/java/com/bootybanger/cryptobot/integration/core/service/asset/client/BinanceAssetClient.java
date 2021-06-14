@@ -1,9 +1,8 @@
 package com.bootybanger.cryptobot.integration.core.service.asset.client;
 
-import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
-import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
+import com.bootybanger.cryptobot.common.constant.dto.ExchangeAssetDTO;
+import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
 import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
-
 import com.bootybanger.cryptobot.common.integration.client.BinanceBaseClient;
 import com.bootybanger.cryptobot.integration.symbol.core.config.BinanceExchangeConfigurationProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,16 +23,16 @@ public class BinanceAssetClient {
     private final BinanceExchangeConfigurationProperties properties;
     private final BinanceBaseClient client;
 
-    public Mono<List<AssetDTO>> getBinanceAssets() {
+    public Mono<List<ExchangeAssetDTO>> getBinanceAssets() {
         return client.getClient(properties.getBaseUrl(), new HashMap<>(), new HashMap<>(),
                 String.class, properties.getAsset().get("getAll"))
                 .map(this::parseBinanceAssetListJson);
     }
 
     //TODO srp
-    private List<AssetDTO> parseBinanceAssetListJson(String json) {
+    private List<ExchangeAssetDTO> parseBinanceAssetListJson(String json) {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<AssetDTO> assetDTOList = new CopyOnWriteArrayList<>();
+        List<ExchangeAssetDTO> exchangeAssetDTOList = new CopyOnWriteArrayList<>();
         try {
             JsonNode assetListNode = objectMapper.readTree(json);
             assetListNode.forEach(assetNode -> {
@@ -43,8 +42,8 @@ public class BinanceAssetClient {
 
                 //TODO можно убрать когда появится исключение символов
                 if (bid != 0 && ask != 0) {
-                    assetDTOList.add(AssetDTO.builder()
-                            .symbolDTO(new SymbolDTO(null, symbol, null))
+                    exchangeAssetDTOList.add(ExchangeAssetDTO.builder()
+                            .exchangeSymbolDTO(ExchangeSymbolDTO.builder().symbol(symbol).build())
                             .exchange(CryptoExchange.BINANCE)
                             .bestBid(bid)
                             .bestAsk(ask)
@@ -55,6 +54,6 @@ public class BinanceAssetClient {
             //TODO логгер
             e.printStackTrace();
         }
-        return assetDTOList;
+        return exchangeAssetDTOList;
     }
 }

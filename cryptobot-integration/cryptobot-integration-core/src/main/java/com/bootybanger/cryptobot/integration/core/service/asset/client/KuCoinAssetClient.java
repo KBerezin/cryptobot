@@ -1,6 +1,7 @@
 package com.bootybanger.cryptobot.integration.core.service.asset.client;
 
-import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
+import com.bootybanger.cryptobot.common.constant.dto.ExchangeAssetDTO;
+import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
 
@@ -24,28 +25,28 @@ public class KuCoinAssetClient {
     private final KuCoinExchangeConfigurationProperties properties;
     private final KuCoinBaseClient client;
 
-    public Mono<List<AssetDTO>> getKuCoinAssets() {
+    public Mono<List<ExchangeAssetDTO>> getKuCoinAssets() {
         return client.getClient(properties.getBaseUrl(), new HashMap<>(), new HashMap<>(),
                 String.class, properties.getAsset().get("getAll"))
                 .map(this::parseKuCoinAssetListJson);
     }
 
     //TODO srp
-    private List<AssetDTO> parseKuCoinAssetListJson(String json) {
+    private List<ExchangeAssetDTO> parseKuCoinAssetListJson(String json) {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<AssetDTO> assetDTOList = new CopyOnWriteArrayList<>();
+        List<ExchangeAssetDTO> exchangeAssetDTOList = new CopyOnWriteArrayList<>();
         try {
             JsonNode tree = objectMapper.readTree(json);
             JsonNode ticker = tree.findValue("ticker");
             ticker.forEach(assetNode -> {
-                String symbol = assetNode.get("symbol").asText().replaceAll("-", "_");
+                String symbol = assetNode.get("symbol").asText().replaceAll("-", "");
                 double bid = assetNode.get("buy").asDouble();
                 double ask = assetNode.get("sell").asDouble();
 
                 //TODO можно убрать когда появится исключение символов
                 if (bid != 0 && ask != 0) {
-                    assetDTOList.add(AssetDTO.builder()
-                            .symbolDTO(new SymbolDTO(null, symbol, null))
+                    exchangeAssetDTOList.add(ExchangeAssetDTO.builder()
+                            .exchangeSymbolDTO(ExchangeSymbolDTO.builder().symbol(symbol).build())
                             .exchange(CryptoExchange.KUCOIN)
                             .bestBid(bid)
                             .bestAsk(ask)
@@ -56,7 +57,7 @@ public class KuCoinAssetClient {
             //TODO логгер
             e.printStackTrace();
         }
-        return assetDTOList;
+        return exchangeAssetDTOList;
     }
 
 }

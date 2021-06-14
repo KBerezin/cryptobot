@@ -1,6 +1,7 @@
 package com.bootybanger.cryptobot.integration.core.service.price.handler;
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
+import com.bootybanger.cryptobot.common.constant.dto.ExchangeAssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetPair;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.integration.core.domain.service.price.handler.AssetSplitter;
@@ -43,13 +44,13 @@ public class AssetSplitterImpl implements AssetSplitter {
                 });
     }
 
-    private AssetPair getAssetPair(AssetDTO assetDTO1, AssetDTO assetDTO2) {
+    private AssetPair getAssetPair(AssetDTO exchangeAssetDTO1, AssetDTO exchangeAssetDTO2) {
         AssetPair assetPair = new AssetPair();
-        assetPair.setSymbolDTO(assetDTO1.getSymbolDTO());
-        assetPair.setAsk(assetDTO1.getBestAsk());
-        assetPair.setAskExchange(assetDTO1.getExchange());
-        assetPair.setBid(assetDTO2.getBestBid());
-        assetPair.setBidExchange(assetDTO2.getExchange());
+        assetPair.setSymbolDTO(exchangeAssetDTO1.getSymbolDTO());
+        assetPair.setAsk(exchangeAssetDTO1.getBestAsk());
+        assetPair.setAskExchange(exchangeAssetDTO1.getExchange());
+        assetPair.setBid(exchangeAssetDTO2.getBestBid());
+        assetPair.setBidExchange(exchangeAssetDTO2.getExchange());
         return assetPair;
     }
 

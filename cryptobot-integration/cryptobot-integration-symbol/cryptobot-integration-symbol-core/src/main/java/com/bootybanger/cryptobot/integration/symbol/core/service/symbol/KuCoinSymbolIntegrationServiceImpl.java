@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 public class KuCoinSymbolIntegrationServiceImpl extends AbstractSymbolIntegrationService {
     public KuCoinSymbolIntegrationServiceImpl(@Qualifier("kuCoinSymbolClient") ExchangeSymbolClient client,
-                                              SymbolDTOMapper symbolDTOMapper) {
+                                              @Qualifier("symbolDTOToSaveMapperImpl") SymbolDTOMapper symbolDTOMapper) {
         super(client, symbolDTOMapper);
     }
 }

@@ -2,6 +2,7 @@ package com.bootybanger.cryptobot.integration.core.service.asset;
 
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
+import com.bootybanger.cryptobot.common.constant.dto.ExchangeAssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.integration.core.domain.service.asset.RealTimeAssetMonitoringService;
 import org.springframework.stereotype.Service;

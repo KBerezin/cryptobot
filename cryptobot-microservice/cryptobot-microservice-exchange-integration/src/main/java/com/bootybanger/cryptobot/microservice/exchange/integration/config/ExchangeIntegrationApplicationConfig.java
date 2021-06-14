@@ -11,6 +11,7 @@ import core.service.symbol.CoinMarketCapCoinIntegrationService;
 import core.service.symbol.CoinUpdateService;
 import core.service.symbol.SymbolUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,35 +25,12 @@ import javax.annotation.PostConstruct;
 public class ExchangeIntegrationApplicationConfig {
 
     @Autowired
-    SymbolDTOMapper symbolDTOMapper;
-
-    @Autowired
-    RealTimeAssetMonitoringService realTimeAssetMonitoringService;
-
-    @Autowired
-    CatalogSymbolIntegrationService catalogSymbolIntegrationService;
-
-    @Autowired
-    BinanceAssetIntegrationService service;
-
-    @Autowired
-    KuCoinAssetIntegrationService service1;
-
-    @Autowired
-    GateAssetIntegrationService service3;
-
-    @Autowired
-    AssetUpdateService facade;
-
-    @Autowired
-    CoinMarketCapCoinIntegrationService coinMarketCapCoinIntegrationService;
-
-    @Autowired
     CoinUpdateService coinUpdateService;
 
     @Autowired
     SymbolUpdateService symbolUpdateService;
 
+    @Qualifier("symbolDTOToSaveMapperImpl")
     @Autowired
     SymbolDTOMapper mapper;
 

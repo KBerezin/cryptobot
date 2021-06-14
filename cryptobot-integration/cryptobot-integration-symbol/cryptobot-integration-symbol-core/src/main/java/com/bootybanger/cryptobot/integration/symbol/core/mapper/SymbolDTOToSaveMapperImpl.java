@@ -4,15 +4,12 @@ import com.bootybanger.cryptobot.common.constant.dto.CoinDTO;
 import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.mapper.SymbolDTOMapper;
-
 import core.service.catalog.CatalogCoinIntegrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 /**
@@ -21,10 +18,11 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class SymbolDTOMapperImpl implements SymbolDTOMapper {
+public class SymbolDTOToSaveMapperImpl implements SymbolDTOMapper {
 
     private final CatalogCoinIntegrationService catalogCoinIntegrationService;
     private List<CoinDTO> allCoins;
+
     @Override
     public SymbolDTO toSymbolDTO(ExchangeSymbolDTO exchangeSymbolDTO) {
         String symbol = exchangeSymbolDTO.getSymbol();

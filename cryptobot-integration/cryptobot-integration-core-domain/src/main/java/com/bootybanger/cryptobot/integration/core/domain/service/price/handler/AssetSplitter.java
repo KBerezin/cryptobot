@@ -1,6 +1,7 @@
 package com.bootybanger.cryptobot.integration.core.domain.service.price.handler;
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
+import com.bootybanger.cryptobot.common.constant.dto.ExchangeAssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetPair;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import reactor.core.publisher.Mono;

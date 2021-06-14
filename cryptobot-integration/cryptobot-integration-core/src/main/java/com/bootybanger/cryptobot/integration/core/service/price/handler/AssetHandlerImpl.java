@@ -2,6 +2,7 @@ package com.bootybanger.cryptobot.integration.core.service.price.handler;
 
 import com.bootybanger.cryptobot.common.constant.dto.ArbitrageWindowDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
+import com.bootybanger.cryptobot.common.constant.dto.ExchangeAssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetPair;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.integration.core.domain.service.asset.AssetUpdateService;
@@ -59,6 +60,7 @@ public class AssetHandlerImpl implements AssetHandler {
                         double pctDiff = PriceMath.calculatePriceDifferencePct(arbitrageWindowDTO.getAssetPair().getBid(), arbitrageWindowDTO.getAssetPair().getAsk());
                         if (pctDiff > 2) {
                             System.out.println("Symbol: " + symbolDTO.getName());
+                            System.out.println("ID: " + symbolDTO.getId());
                             System.out.println("RANK: " + symbolDTO.getBaseAsset().getRank());
                             System.out.println("NET: " + symbolDTO.getBaseAsset().getPlatform());
                             System.out.println("Name: " + symbolDTO.getBaseAsset().getName());
