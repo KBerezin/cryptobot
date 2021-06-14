@@ -21,7 +21,6 @@ import javax.annotation.PostConstruct;
 @Configuration
 @ComponentScan(basePackages = {
         "com.bootybanger.cryptobot.integration.core",
-        "com.bootybanger.cryptobot.common.integration.client"
 })
 public class ExchangeIntegrationApplicationConfig {
 
