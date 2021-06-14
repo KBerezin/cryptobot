@@ -39,7 +39,7 @@ public class SymbolDTOToSaveMapperImpl implements SymbolDTOMapper {
                     return quoteCoins.size() == 1;
                 }).collect(Collectors.toList());
         if (baseCoins.size() == 0) {
-            System.out.println(symbol);
+            System.out.println("Unrecognized symbol: " + symbol);
             return new SymbolDTO();
         }
         CoinDTO baseAsset = baseCoins.get(0);

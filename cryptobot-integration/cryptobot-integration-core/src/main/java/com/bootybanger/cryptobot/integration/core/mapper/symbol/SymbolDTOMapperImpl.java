@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -26,13 +25,17 @@ public class SymbolDTOMapperImpl implements SymbolDTOMapper {
 
     @Override
     public SymbolDTO toSymbolDTO(ExchangeSymbolDTO exchangeSymbolDTO) {
-        Optional<SymbolDTO> symbolDTOOptional = allSymbolDto.stream()
+        List<SymbolDTO> resultList = allSymbolDto.stream()
                 .filter(symbolDTO -> {
                     String symbolName = symbolDTO.getName().replaceAll("_", "");
                     return symbolName.equals(exchangeSymbolDTO.getSymbol());
                 })
-                .findAny();
-        return symbolDTOOptional.orElseGet(SymbolDTO::new);
+                .collect(Collectors.toList());
+        if (resultList.size() == 1) {
+            return resultList.get(0);
+        }
+        //System.out.println("Unrecognized symbol: " + exchangeSymbolDTO.getSymbol());
+        return new SymbolDTO();
     }
 
     @Override

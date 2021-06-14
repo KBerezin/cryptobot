@@ -58,7 +58,7 @@ public class AssetHandlerImpl implements AssetHandler {
                     List<ArbitrageWindowDTO> arbitrageWindowDTOList = symbolDTOListMap.get(symbolDTO);
                     arbitrageWindowDTOList.forEach(arbitrageWindowDTO -> {
                         double pctDiff = PriceMath.calculatePriceDifferencePct(arbitrageWindowDTO.getAssetPair().getBid(), arbitrageWindowDTO.getAssetPair().getAsk());
-                        if (pctDiff > 2) {
+                        if (pctDiff > 1) {
                             System.out.println("Symbol: " + symbolDTO.getName());
                             System.out.println("ID: " + symbolDTO.getId());
                             System.out.println("RANK: " + symbolDTO.getBaseAsset().getRank());
@@ -87,7 +87,8 @@ public class AssetHandlerImpl implements AssetHandler {
                 "LSK_ETH", "HOT_USDT", "HOT_ETH",
 
                 "BTG_USDT", "COTI_USDT", "COTI_BTC", "BTG_BTC", "GTC_BTC", "TRB_USDT", "PNT_BTC", "STC_USDT", "SUN_BTC",
-                "GTC_USDT", "GAS_BTC", "GAS_USDT", "GAS_ETH", "IOTA_BTC", "IOTA_USDT", "IOTA_ETH"
+                "GTC_USDT", "GAS_BTC", "GAS_USDT", "GAS_ETH", "IOTA_BTC", "IOTA_USDT", "IOTA_ETH",
+                "MAN_BTC", "COT_IBTC", "GT_CUSDT", "LSK_BTC", "MDX_BTC", "XVG_ETH", "MDX_USDT", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
 
 
 
