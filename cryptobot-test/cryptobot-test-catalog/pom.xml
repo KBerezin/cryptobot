@@ -22,10 +22,6 @@
             <groupId>com.bootybanger</groupId>
             <artifactId>cryptobot-catalog-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.bootybanger</groupId>
-            <artifactId>cryptobot-integration-core</artifactId>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-test -->
         <dependency>

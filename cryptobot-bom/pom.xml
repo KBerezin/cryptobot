@@ -63,12 +63,12 @@
             <!-- My own project -->
             <dependency>
                 <groupId>com.bootybanger</groupId>
-                <artifactId>cryptobot-common-constant</artifactId>
+                <artifactId>cryptobot-common-integration</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.bootybanger</groupId>
-                <artifactId>cryptobot-common-integration</artifactId>
+                <artifactId>cryptobot-common-constant</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
@@ -97,34 +97,16 @@
                 <artifactId>cryptobot-integration-symbol-core</artifactId>
                 <version>${revision}</version>
             </dependency>
-
-            <!-- К УДАЛЕНИЮ -->
             <dependency>
                 <groupId>com.bootybanger</groupId>
-                <artifactId>cryptobot-integration-core-domain</artifactId>
+                <artifactId>cryptobot-integration-asset-core</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.bootybanger</groupId>
-                <artifactId>cryptobot-integration-core</artifactId>
+                <artifactId>cryptobot-integration-asset-core-domain</artifactId>
                 <version>${revision}</version>
             </dependency>
-            <dependency>
-                <groupId>com.bootybanger</groupId>
-                <artifactId>cryptobot-asset-monitoring-api</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bootybanger</groupId>
-                <artifactId>cryptobot-asset-monitoring-core</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bootybanger</groupId>
-                <artifactId>cryptobot-asset-monitoring-core-domain</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <!-- К УДАЛЕНИЮ -->
 
 
             <!-- Spring -->

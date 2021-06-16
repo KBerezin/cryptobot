@@ -2,7 +2,7 @@ package com.bootybanger.cryptobot.integration.symbol.core.service.client;
 
 import com.bootybanger.cryptobot.common.integration.client.BaseClient;
 import com.bootybanger.cryptobot.common.integration.config.properties.SymbolProperties;
-import core.service.symbol.AbstractExchangeSymbolClient;
+import core.service.client.AbstractExchangeSymbolClient;
 import core.util.SymbolParseUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

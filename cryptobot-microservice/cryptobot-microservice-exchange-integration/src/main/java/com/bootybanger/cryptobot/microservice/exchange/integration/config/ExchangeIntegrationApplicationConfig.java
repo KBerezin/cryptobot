@@ -1,7 +1,7 @@
 package com.bootybanger.cryptobot.microservice.exchange.integration.config;
 
 import com.bootybanger.cryptobot.common.constant.mapper.SymbolDTOMapper;
-import core.service.symbol.CoinUpdateService;
+import core.service.coin.CoinUpdateService;
 import core.service.symbol.SymbolUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,8 +12,8 @@ import javax.annotation.PostConstruct;
 
 @Configuration
 @ComponentScan(basePackages = {
-        "com.bootybanger.cryptobot.integration.core",
         "com.bootybanger.cryptobot.integration.symbol.core",
+        "com.bootybanger.cryptobot.integration.asset.core",
         "com.bootybanger.cryptobot.common.integration.config"
 })
 public class ExchangeIntegrationApplicationConfig {

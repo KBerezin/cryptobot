@@ -16,8 +16,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.bootybanger</groupId>
-            <artifactId>cryptobot-integration-core</artifactId>
+            <artifactId>cryptobot-integration-asset-core</artifactId>
         </dependency>
     </dependencies>
 

@@ -1,7 +1,6 @@
 package com.bootybanger.cryptobot.integration.symbol.core.util;
 
 import com.bootybanger.cryptobot.common.constant.enumeration.CryptoExchange;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.util.AbstractSymbolParseUtil;
 import org.springframework.stereotype.Component;

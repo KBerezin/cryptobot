@@ -15,10 +15,7 @@
 
     <modules>
         <module>cryptobot-integration-symbol</module>
-        <module>cryptobot-integration-api</module>
-        <module>cryptobot-integration-api-domain</module>
-        <module>cryptobot-integration-core</module>
-        <module>cryptobot-integration-core-domain</module>
+        <module>cryptobot-integration-asset</module>
     </modules>
 
 </project>

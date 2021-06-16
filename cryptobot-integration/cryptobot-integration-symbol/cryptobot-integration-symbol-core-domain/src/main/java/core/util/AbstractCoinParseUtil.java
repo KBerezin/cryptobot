@@ -513,6 +513,7 @@ public abstract class AbstractCoinParseUtil implements CoinParseUtil {
         duplicateNameMap.put("Spice", "SPICE1");
         duplicateNameMap.put("Evolution Finance", "EVN1");
         duplicateNameMap.put("BeeEx", "BEE1");
+        duplicateNameMap.put("Bees", "BEE2");
         duplicateNameMap.put("Kitten Token", "KTN1");
         duplicateNameMap.put("YieldNyan", "NYAN1");
         duplicateNameMap.put("AlphaLink", "ANK1");
@@ -564,6 +565,7 @@ public abstract class AbstractCoinParseUtil implements CoinParseUtil {
         duplicateNameMap.put("Alium Finance", "ALM1");
         duplicateNameMap.put("Future Of Finance Fund", "FFF1");
         duplicateNameMap.put("Mrweb Finance", "AMA1");
+        duplicateNameMap.put("IRON Titanium Token", "TITAN1");
         String alternativeSymbol = duplicateNameMap.get(coinDTO.getName());
         if (alternativeSymbol != null) {
             coinDTO.setSymbol(alternativeSymbol);

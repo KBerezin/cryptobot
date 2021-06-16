@@ -2,6 +2,7 @@ package core.service.symbol;
 
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.mapper.SymbolDTOMapper;
+import core.service.client.ExchangeSymbolClient;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
