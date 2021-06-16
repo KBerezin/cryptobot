@@ -3,7 +3,7 @@ package com.bootybanger.cryptobot.integration.symbol.core.service.client;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 
 import com.bootybanger.cryptobot.common.integration.client.CatalogBaseClient;
-import com.bootybanger.cryptobot.integration.symbol.core.config.CatalogConfigurationProperties;
+import com.bootybanger.cryptobot.common.integration.config.properties.CatalogConfigurationProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;

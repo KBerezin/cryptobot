@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.integration.symbol.core.config;
+package com.bootybanger.cryptobot.common.integration.config.properties;
 
 import com.bootybanger.cryptobot.common.integration.factory.YamlPropertyLoaderFactory;
 import jakarta.validation.constraints.NotBlank;

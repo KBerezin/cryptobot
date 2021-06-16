@@ -88,7 +88,7 @@ public class AssetHandlerImpl implements AssetHandler {
 
                 "BTG_USDT", "COTI_USDT", "COTI_BTC", "BTG_BTC", "GTC_BTC", "TRB_USDT", "PNT_BTC", "STC_USDT", "SUN_BTC",
                 "GTC_USDT", "GAS_BTC", "GAS_USDT", "GAS_ETH", "IOTA_BTC", "IOTA_USDT", "IOTA_ETH",
-                "MAN_BTC", "COT_IBTC", "GT_CUSDT", "LSK_BTC", "MDX_BTC", "XVG_ETH", "MDX_USDT", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
+                "MAN_BTC", "COT_IBTC", "GT_CUSDT", "LSK_BTC", "MDX_BTC", "XVG_ETH", "MDX_USDT", "AE_ETH", "", "", "", "", "", "", "", "", "", "", "", "", ""
 
 
 

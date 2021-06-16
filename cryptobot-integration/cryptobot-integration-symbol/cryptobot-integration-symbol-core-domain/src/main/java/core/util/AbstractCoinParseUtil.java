@@ -70,6 +70,7 @@ public abstract class AbstractCoinParseUtil implements CoinParseUtil {
     }
 
     private CoinDTO handleDuplicates(CoinDTO coinDTO) {
+        System.out.println(coinDTO);
         Map<String, String> duplicateNameMap = new HashMap<>();
         duplicateNameMap.put("BLOCKIDCOIN", "BID1");
         duplicateNameMap.put("DeFi Bids", "BID2");
@@ -250,6 +251,7 @@ public abstract class AbstractCoinParseUtil implements CoinParseUtil {
         duplicateNameMap.put("GMB", "GMB1");
         duplicateNameMap.put("Triforce Protocol", "TFC1");
         duplicateNameMap.put("Web Coin Pay", "WEC1");
+        duplicateNameMap.put("Whole Earth Coin", "WEC2");
         duplicateNameMap.put("Polywolf", "MOON1");
         duplicateNameMap.put("Don-key", "DON1");
         duplicateNameMap.put("DEONEX COIN", "DON2");
@@ -559,6 +561,9 @@ public abstract class AbstractCoinParseUtil implements CoinParseUtil {
         duplicateNameMap.put("Bitget DeFi Token", "BFT1");
         duplicateNameMap.put("SaltSwap Finance", "SALT1");
         duplicateNameMap.put("ARCx", "ARC1");
+        duplicateNameMap.put("Alium Finance", "ALM1");
+        duplicateNameMap.put("Future Of Finance Fund", "FFF1");
+        duplicateNameMap.put("Mrweb Finance", "AMA1");
         String alternativeSymbol = duplicateNameMap.get(coinDTO.getName());
         if (alternativeSymbol != null) {
             coinDTO.setSymbol(alternativeSymbol);

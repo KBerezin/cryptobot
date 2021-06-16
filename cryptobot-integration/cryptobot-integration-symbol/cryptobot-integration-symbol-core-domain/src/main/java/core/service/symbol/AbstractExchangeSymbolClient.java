@@ -2,7 +2,7 @@ package core.service.symbol;
 
 import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
 import com.bootybanger.cryptobot.common.integration.client.BaseClient;
-import core.config.SymbolProperties;
+import com.bootybanger.cryptobot.common.integration.config.properties.SymbolProperties;
 import core.util.SymbolParseUtil;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;

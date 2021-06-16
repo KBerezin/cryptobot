@@ -2,7 +2,7 @@ package com.bootybanger.cryptobot.integration.symbol.core.service.client;
 
 import com.bootybanger.cryptobot.common.constant.dto.CoinDTO;
 import com.bootybanger.cryptobot.common.integration.client.CoinMarketCapBaseClient;
-import com.bootybanger.cryptobot.integration.symbol.core.config.CoinMarketCapConfigurationProperties;
+import com.bootybanger.cryptobot.common.integration.config.properties.CoinMarketCapConfigurationProperties;
 import core.util.CoinParseUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

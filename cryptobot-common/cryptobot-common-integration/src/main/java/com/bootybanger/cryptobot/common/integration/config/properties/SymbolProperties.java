@@ -1,6 +1,4 @@
-package core.config;
-
-import com.bootybanger.cryptobot.common.integration.config.IntegrationProperties;
+package com.bootybanger.cryptobot.common.integration.config.properties;
 
 import java.util.Map;
 
