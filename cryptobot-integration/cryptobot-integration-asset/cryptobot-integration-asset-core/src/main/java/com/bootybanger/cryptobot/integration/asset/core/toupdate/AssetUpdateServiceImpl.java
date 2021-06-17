@@ -23,7 +23,7 @@ public class AssetUpdateServiceImpl implements AssetUpdateService {
     private final List<ExchangeAssetIntegrationService> assetIntegrationServiceList;
 
     @Override
-    @Scheduled(initialDelay = 7000, fixedDelay = 10500)
+    @Scheduled(initialDelay = 7000, fixedDelay = 10000)
     public void updateActiveAssetMap() {
         System.out.println("запускаю сканирование активов бирж");
         Stream<Mono<List<AssetDTO>>> monoStream = assetIntegrationServiceList.stream()

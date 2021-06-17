@@ -39,7 +39,7 @@ public class AssetHandlerImpl implements AssetHandler {
     ArbitrageWindowFinder arbitrageWindowFinder;
 
     @Override
-    @Scheduled(initialDelay = 15000, fixedDelay = 11000)
+    @Scheduled(initialDelay = 15000, fixedDelay = 10000)
     public void handle() {
         System.out.println("запускаю обработку");
         Mono<Map<SymbolDTO, Set<AssetDTO>>> activeAssetMap = realTimeAssetMonitoringService.getAssetMap();
