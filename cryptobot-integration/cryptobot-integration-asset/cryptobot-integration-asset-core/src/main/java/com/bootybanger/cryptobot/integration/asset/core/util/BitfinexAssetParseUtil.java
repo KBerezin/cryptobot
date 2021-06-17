@@ -30,18 +30,6 @@ public class BitfinexAssetParseUtil extends AbstractAssetParseUtil {
     }
 
     @Override
-    public List<ExchangeAssetDTO> getExchangeAssetDTOListFromNode(JsonNode assetListNode) {
-        List<ExchangeAssetDTO> exchangeAssetDTOList = new CopyOnWriteArrayList<>();
-        assetListNode.forEach(assetNode -> {
-            ExchangeAssetDTO eaDTO = getExchangeAssetDTOFromNode(assetNode);
-            if (eaDTO.getBestBid() != 0 && eaDTO.getBestAsk() != 0) {
-                exchangeAssetDTOList.add(eaDTO);
-            }
-        });
-        return exchangeAssetDTOList;
-    }
-
-    @Override
     public ExchangeAssetDTO getExchangeAssetDTOFromNode(JsonNode assetNode) {
         String symbol = assetNode.get(0).asText()
                 .substring(1)

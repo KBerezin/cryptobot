@@ -4,7 +4,7 @@ import com.bootybanger.cryptobot.common.constant.dto.CoinDTO;
 import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.mapper.SymbolDTOMapper;
-import core.service.catalog.CatalogCoinIntegrationService;
+import com.bootybanger.cryptobot.common.integration.service.catalog.CatalogCoinIntegrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;

@@ -3,13 +3,10 @@ package com.bootybanger.cryptobot.integration.asset.core.mapper;
 import com.bootybanger.cryptobot.common.constant.dto.ExchangeSymbolDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.mapper.SymbolDTOMapper;
-import core.service.catalog.CatalogSymbolIntegrationService;
+import com.bootybanger.cryptobot.common.integration.service.catalog.CatalogSymbolIntegrationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.stream.Collectors;
 

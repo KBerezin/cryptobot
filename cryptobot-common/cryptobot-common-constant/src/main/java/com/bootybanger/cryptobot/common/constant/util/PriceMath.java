@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.integration.asset.core.toupdate.handler;
+package com.bootybanger.cryptobot.common.constant.util;
 
 public class PriceMath {
     public static final double REQUIRED_PRICE_DIFFERENCE_PCT = 0.3d;

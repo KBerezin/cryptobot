@@ -1,4 +1,4 @@
-package core.service.catalog;
+package com.bootybanger.cryptobot.common.integration.service.catalog;
 
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import reactor.core.publisher.Mono;

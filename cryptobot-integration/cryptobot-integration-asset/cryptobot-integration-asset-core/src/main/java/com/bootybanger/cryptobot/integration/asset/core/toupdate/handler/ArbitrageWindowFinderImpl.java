@@ -3,6 +3,7 @@ package com.bootybanger.cryptobot.integration.asset.core.toupdate.handler;
 import com.bootybanger.cryptobot.common.constant.dto.ArbitrageWindowDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetPair;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
+import com.bootybanger.cryptobot.common.constant.util.PriceMath;
 import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.handler.ArbitrageWindowFinder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

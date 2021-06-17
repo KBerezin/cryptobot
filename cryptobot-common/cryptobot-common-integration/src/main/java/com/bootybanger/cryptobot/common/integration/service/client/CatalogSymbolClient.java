@@ -1,6 +1,6 @@
-package com.bootybanger.cryptobot.integration.symbol.core.service.client;
+package com.bootybanger.cryptobot.common.integration.service.client;
 
-import com.bootybanger.cryptobot.common.constant.dto.CoinDTO;
+import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 
 import com.bootybanger.cryptobot.common.integration.client.CatalogBaseClient;
 import com.bootybanger.cryptobot.common.integration.config.properties.CatalogConfigurationProperties;
@@ -14,18 +14,19 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class CatalogCoinClient {
+public class CatalogSymbolClient {
 
     private final CatalogConfigurationProperties properties;
     private final CatalogBaseClient client;
 
-    public Mono<Void> addCoinList(List<CoinDTO> coinDTOList) {
-        return client.postClient(properties.getBaseUrl(), coinDTOList, new HashMap<>(), new HashMap<>(),
-                new ParameterizedTypeReference<>() {}, properties.getCoin().get("addList"));
+    public Mono<Void> addSymbolList(List<SymbolDTO> symbolDTOList) {
+        return client.postClient(properties.getBaseUrl(), symbolDTOList, new HashMap<>(), new HashMap<>(),
+                new ParameterizedTypeReference<>() {}, properties.getSymbol().get("addList"));
     }
 
-    public Mono<List<CoinDTO>> getAllCoins() {
+    public Mono<List<SymbolDTO>> getAllSymbols() {
         return client.getClient(properties.getBaseUrl(), new HashMap<>(), new HashMap<>(),
-                new ParameterizedTypeReference<>() {}, properties.getCoin().get("getAll"));
+                new ParameterizedTypeReference<>() {}, properties.getSymbol().get("getAll"));
     }
+
 }

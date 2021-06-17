@@ -1,7 +1,7 @@
 package com.bootybanger.cryptobot.integration.symbol.core.service.coin;
 
 import com.bootybanger.cryptobot.common.constant.dto.CoinDTO;
-import core.service.catalog.CatalogCoinIntegrationService;
+import com.bootybanger.cryptobot.common.integration.service.catalog.CatalogCoinIntegrationService;
 import core.service.coin.CoinMarketCapCoinIntegrationService;
 import core.service.coin.CoinUpdateService;
 import lombok.RequiredArgsConstructor;
