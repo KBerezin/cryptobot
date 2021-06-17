@@ -5,7 +5,7 @@ import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetPair;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.util.PriceMath;
-import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.asset.AssetUpdateService;
+import com.bootybanger.cryptobot.integration.asset.core.domain.service.AssetUpdateService;
 import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.asset.RealTimeAssetMonitoringService;
 import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.handler.ArbitrageWindowFinder;
 import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.handler.AssetHandler;

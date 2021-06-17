@@ -9,9 +9,10 @@ import java.util.List;
 
 @Data
 @Builder
-@EqualsAndHashCode(exclude = {"bestBid", "bestAsk"})
+@EqualsAndHashCode(exclude = {"bestBid", "bestAsk", "timeStamp"})
 public class AssetDTO {
     private SymbolDTO symbolDTO;
+    private long timeStamp;
     private CryptoExchange exchange;
     private List<OrderDTO> bidOrders;
     private List<OrderDTO> askOrders;

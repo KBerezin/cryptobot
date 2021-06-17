@@ -39,6 +39,22 @@
             <!-- My own project -->
             <dependency>
                 <groupId>com.bootybanger</groupId>
+                <artifactId>cryptobot-cache-asset-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bootybanger</groupId>
+                <artifactId>cryptobot-cache-asset-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bootybanger</groupId>
+                <artifactId>cryptobot-cache-asset-core-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.bootybanger</groupId>
                 <artifactId>cryptobot-common-constant</artifactId>
                 <version>${revision}</version>
             </dependency>

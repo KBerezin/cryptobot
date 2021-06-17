@@ -1,9 +1,8 @@
-package com.bootybanger.cryptobot.integration.asset.core.toupdate;
+package com.bootybanger.cryptobot.cache.asset.core.service;
 
-
+import com.bootybanger.cryptobot.cache.asset.core.domain.service.AssetCacheService;
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
-import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.asset.RealTimeAssetMonitoringService;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -15,7 +14,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
-public class RealTimeAssetMonitoringServiceImpl implements RealTimeAssetMonitoringService {
+public class AssetCacheServiceImpl implements AssetCacheService {
     private final Map<SymbolDTO, Set<AssetDTO>> assetMap = new ConcurrentHashMap<>();
 
     @Override
