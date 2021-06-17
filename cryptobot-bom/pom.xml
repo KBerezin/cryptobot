@@ -24,7 +24,6 @@
         <mockito.version>3.6.28</mockito.version>
         <!-- Tests -->
 
-
         <reactor-core.version>3.4.5</reactor-core.version>
         <spring.version>5.3.7</spring.version>
         <spring-boot.version>2.5.0</spring-boot.version>
@@ -37,40 +36,18 @@
 
     <dependencyManagement>
         <dependencies>
-
-            <!-- Experimental -->
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-r2dbc</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.r2dbc</groupId>
-                <artifactId>r2dbc-postgresql</artifactId>
-                <version>${r2dbc-postgresql.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>${postgresql.version}</version>
-            </dependency>
-
-
-
-
-
             <!-- My own project -->
-            <dependency>
-                <groupId>com.bootybanger</groupId>
-                <artifactId>cryptobot-common-integration</artifactId>
-                <version>${revision}</version>
-            </dependency>
             <dependency>
                 <groupId>com.bootybanger</groupId>
                 <artifactId>cryptobot-common-constant</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>com.bootybanger</groupId>
+                <artifactId>cryptobot-common-integration</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.bootybanger</groupId>
                 <artifactId>cryptobot-catalog-api</artifactId>
@@ -89,12 +66,12 @@
 
             <dependency>
                 <groupId>com.bootybanger</groupId>
-                <artifactId>cryptobot-integration-symbol-core-domain</artifactId>
+                <artifactId>cryptobot-integration-symbol-core</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.bootybanger</groupId>
-                <artifactId>cryptobot-integration-symbol-core</artifactId>
+                <artifactId>cryptobot-integration-symbol-core-domain</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
@@ -107,7 +84,7 @@
                 <artifactId>cryptobot-integration-asset-core-domain</artifactId>
                 <version>${revision}</version>
             </dependency>
-
+            <!-- My own project -->
 
             <!-- Spring -->
             <dependency>
@@ -152,8 +129,12 @@
             </dependency>
             <!-- Spring -->
 
-
-
+            <!-- Util -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
             <dependency>
                 <groupId>io.projectreactor</groupId>
                 <artifactId>reactor-core</artifactId>
