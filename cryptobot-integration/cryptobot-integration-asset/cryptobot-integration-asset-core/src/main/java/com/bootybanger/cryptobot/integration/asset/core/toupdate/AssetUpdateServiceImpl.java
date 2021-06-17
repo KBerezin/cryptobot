@@ -20,8 +20,9 @@ public class AssetUpdateServiceImpl implements AssetUpdateService {
     private final List<ExchangeAssetIntegrationService> assetIntegrationServiceList;
 
     @Override
-    @Scheduled(initialDelay = 500, fixedDelay = 10500)
+    @Scheduled(initialDelay = 5000, fixedDelay = 10500)
     public void updateActiveAssetMap() {
+        System.out.println("запускаю обновление");
         Optional<Mono<List<AssetDTO>>> monoAssetListOptional = assetIntegrationServiceList.stream()
                 .map(ExchangeAssetIntegrationService::getAllAssets)
                 .reduce((mono1, mono2) ->

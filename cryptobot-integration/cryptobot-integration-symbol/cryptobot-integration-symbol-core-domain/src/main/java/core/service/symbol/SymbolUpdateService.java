@@ -1,5 +1,7 @@
 package core.service.symbol;
 
+import reactor.core.publisher.Flux;
+
 public interface SymbolUpdateService {
-    void updateSymbols();
+    Flux<Void> updateSymbols();
 }

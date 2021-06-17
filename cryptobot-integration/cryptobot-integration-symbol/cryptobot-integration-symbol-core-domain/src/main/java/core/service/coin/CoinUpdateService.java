@@ -1,5 +1,7 @@
 package core.service.coin;
 
+import reactor.core.publisher.Mono;
+
 public interface CoinUpdateService {
-    void updateCoins();
+    Mono<Void> updateCoins();
 }

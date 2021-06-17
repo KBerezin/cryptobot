@@ -20,6 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping("/api/catalog/symbol")
 public class SymbolController {
+    private final Object monitor = new Object();
     private final SymbolService symbolService;
 
     @GetMapping("/get/{symbolId}")
@@ -61,7 +62,9 @@ public class SymbolController {
     @PostMapping("/add/list")
     public ResponseEntity<Void> addSymbols(@RequestBody List<SymbolDTO> symbols) {
         if (!symbols.isEmpty()) {
-            symbolService.addAll(symbols);
+            synchronized (monitor) {
+                symbolService.addAll(symbols);
+            }
         }
         return ResponseEntity.ok().build();
     }

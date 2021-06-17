@@ -1,0 +1,4 @@
+bitfinex:
+  baseUrl: https://api-pub.bitfinex.com
+  asset:
+    getAll: /v2/tickers

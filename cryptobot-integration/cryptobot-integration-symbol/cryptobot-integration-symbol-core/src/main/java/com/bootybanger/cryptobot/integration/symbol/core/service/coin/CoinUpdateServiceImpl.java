@@ -18,8 +18,8 @@ public class CoinUpdateServiceImpl implements CoinUpdateService {
     private final CatalogCoinIntegrationService catalogCoinIntegrationService;
 
     @Override
-    public void updateCoins() {
+    public Mono<Void> updateCoins() {
         Mono<List<CoinDTO>> allCoins = coinMarketCapCoinIntegrationService.getAllCoins();
-        allCoins.subscribe(coinDTOList -> catalogCoinIntegrationService.addList(coinDTOList).subscribe());
+        return allCoins.flatMap(catalogCoinIntegrationService::addList);
     }
 }

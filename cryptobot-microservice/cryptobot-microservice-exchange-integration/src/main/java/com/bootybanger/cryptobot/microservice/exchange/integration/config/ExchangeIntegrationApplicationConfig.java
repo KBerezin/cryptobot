@@ -7,8 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Scheduler;
+import reactor.core.scheduler.Schedulers;
 
 import javax.annotation.PostConstruct;
+import java.time.Duration;
 
 @Configuration
 @ComponentScan(basePackages = {
@@ -28,12 +33,33 @@ public class ExchangeIntegrationApplicationConfig {
     @Autowired
     SymbolDTOMapper mapper;
 
+    @Qualifier("symbolDTOMapperImpl")
+    @Autowired
+    SymbolDTOMapper mapper1;
+
     @PostConstruct
-    void init() throws InterruptedException {
-        coinUpdateService.updateCoins();
-        Thread.sleep(10000);
-        symbolUpdateService.updateSymbols();
-        mapper.update();
+    void init() {
+        coinUpdateService.updateCoins().subscribe(
+                unused -> System.out.println("----------------обновление монет ок-------------------"),
+                throwable -> System.out.println("ошибка1 " + throwable.getMessage()),
+                () -> {
+
+                    symbolUpdateService.updateSymbols().subscribe(
+                            unused -> System.out.println("----------------обновление символов ок-------------------"),
+                            throwable -> System.out.println("ошибка2 " + throwable.getMessage()),
+                            () -> {
+                                System.out.println("завершено, запускаю обновление маппера символов");
+                                mapper1.update();
+                            });
+
+
+
+                    System.out.println("завершено, запускаю обновление маппера");
+                    mapper.update();
+                });
+
+
+
     }
 
 }

@@ -226,6 +226,7 @@ public abstract class AbstractCoinParseUtil implements CoinParseUtil {
         duplicateNameMap.put("Bitcoin File", "BIFI2");
         duplicateNameMap.put("LinkToken", "LTK1");
         duplicateNameMap.put("BLOCKCLOUT", "CLOUT1");
+        duplicateNameMap.put("BITCLOUT", "CLOUT2");
         duplicateNameMap.put("Wisdom Chain", "WDC1");
         duplicateNameMap.put("StakeCubeCoin", "SCC1");
         duplicateNameMap.put("SiaCashCoin", "SCC2");
@@ -566,6 +567,7 @@ public abstract class AbstractCoinParseUtil implements CoinParseUtil {
         duplicateNameMap.put("Future Of Finance Fund", "FFF1");
         duplicateNameMap.put("Mrweb Finance", "AMA1");
         duplicateNameMap.put("IRON Titanium Token", "TITAN1");
+        duplicateNameMap.put("Bitcoin Networks", "BTCN1");
         String alternativeSymbol = duplicateNameMap.get(coinDTO.getName());
         if (alternativeSymbol != null) {
             coinDTO.setSymbol(alternativeSymbol);
@@ -575,7 +577,7 @@ public abstract class AbstractCoinParseUtil implements CoinParseUtil {
 
     private boolean isExcludedCoin(CoinDTO coinDTO) {
         List<String> excludedSymbols = Arrays.asList("KUN", "QUSD", "GET", "OCT", "SBT",
-                "ETH3L", "ETH3S", "BTC3S", "BTC3L", "BULL", "BEAR");
+                "ETH3L", "ETH3S", "BTC3S", "BTC3L", "BULL", "BEAR", "BTCX");
         return excludedSymbols.contains(coinDTO.getSymbol());
     }
 }

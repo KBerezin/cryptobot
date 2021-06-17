@@ -7,6 +7,7 @@ import core.service.catalog.CatalogSymbolIntegrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -48,9 +49,13 @@ public class SymbolDTOMapperImpl implements SymbolDTOMapper {
 
     //TODO
     @Override
-    @PostConstruct
-    @Scheduled(cron = "* * * * * *")
     public void update() {
-        allSymbolDto = catalogSymbolIntegrationService.getAllSymbols().block();
+        catalogSymbolIntegrationService.getAllSymbols().subscribe(
+                symbolDTOList -> {
+                    System.out.println("при обновлении маппера пришло символов: " + symbolDTOList.size());
+                    allSymbolDto = symbolDTOList;
+                },
+                throwable -> System.out.println(throwable.getMessage()),
+                () -> System.out.println("Обновление для маппинг завершено"));
     }
 }

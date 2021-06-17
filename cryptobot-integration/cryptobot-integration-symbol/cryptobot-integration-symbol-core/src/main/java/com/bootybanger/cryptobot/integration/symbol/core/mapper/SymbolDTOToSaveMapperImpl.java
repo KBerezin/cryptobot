@@ -7,8 +7,8 @@ import com.bootybanger.cryptobot.common.constant.mapper.SymbolDTOMapper;
 import core.service.catalog.CatalogCoinIntegrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +34,7 @@ public class SymbolDTOToSaveMapperImpl implements SymbolDTOMapper {
                             .collect(Collectors.toList());
                     if (quoteCoins.size() > 1) {
                         throw new RuntimeException("Too many appropriate quote coins: symbol:" + symbol +
-                                " quote " + quoteCoins.toString() +  " basecoin: " + baseCoin.toString());
+                                " quote " + quoteCoins.toString() + " basecoin: " + baseCoin.toString());
                     }
                     return quoteCoins.size() == 1;
                 }).collect(Collectors.toList());
@@ -60,8 +60,14 @@ public class SymbolDTOToSaveMapperImpl implements SymbolDTOMapper {
 
     //TODO
     @Override
-    @PostConstruct
     public void update() {
-        allCoins = catalogCoinIntegrationService.getList().block();
+        Mono<List<CoinDTO>> list = catalogCoinIntegrationService.getList();
+        list.subscribe(
+                coinDTOList -> {
+                    System.out.println(coinDTOList.size());
+                    allCoins = coinDTOList;
+                },
+                throwable -> System.out.println(throwable.getMessage()),
+                () -> System.out.println("Обновление для сохранения завершено"));
     }
 }

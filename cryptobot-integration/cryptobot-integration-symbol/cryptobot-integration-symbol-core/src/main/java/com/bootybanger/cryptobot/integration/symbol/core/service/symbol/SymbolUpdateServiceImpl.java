@@ -6,10 +6,11 @@ import core.service.symbol.ExchangeSymbolIntegrationService;
 import core.service.symbol.SymbolUpdateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -19,14 +20,9 @@ public class SymbolUpdateServiceImpl implements SymbolUpdateService {
     private final CatalogSymbolIntegrationService catalogService;
 
     @Override
-    public void updateSymbols() {
-        Optional<Mono<List<SymbolDTO>>> monoSymbolListOptional = symbolServices.stream()
-                .map(ExchangeSymbolIntegrationService::getAllSymbols)
-                .reduce((mono1, mono2) ->
-                        mono1.flatMap(symbolList1 -> mono2.map(symbolList2 -> {
-                            symbolList2.addAll(symbolList1);
-                            return symbolList2;
-                        })));
-        monoSymbolListOptional.ifPresent(mono -> mono.subscribe(symbolDTOList -> catalogService.addList(symbolDTOList).subscribe()));
+    public Flux<Void> updateSymbols() {
+        Stream<Mono<List<SymbolDTO>>> monoStream = symbolServices.stream()
+                .map(ExchangeSymbolIntegrationService::getAllSymbols);
+        return Flux.fromStream(monoStream).flatMap(listMono -> listMono.flatMap(catalogService::addList));
     }
 }

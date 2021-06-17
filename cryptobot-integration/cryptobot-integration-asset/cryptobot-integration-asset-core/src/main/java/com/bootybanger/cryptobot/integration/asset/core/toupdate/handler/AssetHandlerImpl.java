@@ -38,8 +38,9 @@ public class AssetHandlerImpl implements AssetHandler {
     ArbitrageWindowFinder arbitrageWindowFinder;
 
     @Override
-    @Scheduled(initialDelay = 10000, fixedDelay = 11000)
+    @Scheduled(initialDelay = 15000, fixedDelay = 11000)
     public void handle() {
+        System.out.println("запускаю обработку");
         Mono<Map<SymbolDTO, Set<AssetDTO>>> activeAssetMap = realTimeAssetMonitoringService.getAssetMap();
         activeAssetMap
                 .map(symbolDTOListMap ->
@@ -57,7 +58,7 @@ public class AssetHandlerImpl implements AssetHandler {
                     List<ArbitrageWindowDTO> arbitrageWindowDTOList = symbolDTOListMap.get(symbolDTO);
                     arbitrageWindowDTOList.forEach(arbitrageWindowDTO -> {
                         double pctDiff = PriceMath.calculatePriceDifferencePct(arbitrageWindowDTO.getAssetPair().getBid(), arbitrageWindowDTO.getAssetPair().getAsk());
-                        if (pctDiff > 1) {
+                        if (pctDiff > 0 && pctDiff < 1.5) {
                             System.out.println("Symbol: " + symbolDTO.getName());
                             System.out.println("ID: " + symbolDTO.getId());
                             System.out.println("RANK: " + symbolDTO.getBaseAsset().getRank());
