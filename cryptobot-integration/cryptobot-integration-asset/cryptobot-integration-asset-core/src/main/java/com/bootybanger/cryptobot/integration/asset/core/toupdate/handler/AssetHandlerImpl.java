@@ -58,7 +58,7 @@ public class AssetHandlerImpl implements AssetHandler {
                     List<ArbitrageWindowDTO> arbitrageWindowDTOList = symbolDTOListMap.get(symbolDTO);
                     arbitrageWindowDTOList.forEach(arbitrageWindowDTO -> {
                         double pctDiff = PriceMath.calculatePriceDifferencePct(arbitrageWindowDTO.getAssetPair().getBid(), arbitrageWindowDTO.getAssetPair().getAsk());
-                        if (pctDiff > 0 && pctDiff < 1.5) {
+                        if (pctDiff > 0) {
                             System.out.println("Symbol: " + symbolDTO.getName());
                             System.out.println("ID: " + symbolDTO.getId());
                             System.out.println("RANK: " + symbolDTO.getBaseAsset().getRank());

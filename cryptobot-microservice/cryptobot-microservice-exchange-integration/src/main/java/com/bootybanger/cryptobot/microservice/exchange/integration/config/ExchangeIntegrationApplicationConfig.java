@@ -43,7 +43,6 @@ public class ExchangeIntegrationApplicationConfig {
                 unused -> System.out.println("----------------обновление монет ок-------------------"),
                 throwable -> System.out.println("ошибка1 " + throwable.getMessage()),
                 () -> {
-
                     symbolUpdateService.updateSymbols().subscribe(
                             unused -> System.out.println("----------------обновление символов ок-------------------"),
                             throwable -> System.out.println("ошибка2 " + throwable.getMessage()),
@@ -51,9 +50,6 @@ public class ExchangeIntegrationApplicationConfig {
                                 System.out.println("завершено, запускаю обновление маппера символов");
                                 mapper1.update();
                             });
-
-
-
                     System.out.println("завершено, запускаю обновление маппера");
                     mapper.update();
                 });
