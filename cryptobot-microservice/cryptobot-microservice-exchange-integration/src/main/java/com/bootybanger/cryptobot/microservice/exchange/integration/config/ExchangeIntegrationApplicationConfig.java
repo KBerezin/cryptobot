@@ -7,13 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Scheduler;
-import reactor.core.scheduler.Schedulers;
 
 import javax.annotation.PostConstruct;
-import java.time.Duration;
 
 @Configuration
 @ComponentScan(basePackages = {
@@ -53,9 +48,6 @@ public class ExchangeIntegrationApplicationConfig {
                     System.out.println("завершено, запускаю обновление маппера");
                     mapper.update();
                 });
-
-
-
     }
 
 }
