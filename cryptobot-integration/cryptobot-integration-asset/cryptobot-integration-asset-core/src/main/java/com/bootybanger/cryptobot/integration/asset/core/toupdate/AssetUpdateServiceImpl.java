@@ -1,8 +1,8 @@
 package com.bootybanger.cryptobot.integration.asset.core.toupdate;
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
-import com.bootybanger.cryptobot.integration.asset.core.domain.service.ExchangeAssetIntegrationService;
 import com.bootybanger.cryptobot.integration.asset.core.domain.service.AssetUpdateService;
+import com.bootybanger.cryptobot.integration.asset.core.domain.service.ExchangeAssetIntegrationService;
 import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.asset.RealTimeAssetMonitoringService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -12,7 +12,6 @@ import reactor.core.publisher.Mono;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 @Service
