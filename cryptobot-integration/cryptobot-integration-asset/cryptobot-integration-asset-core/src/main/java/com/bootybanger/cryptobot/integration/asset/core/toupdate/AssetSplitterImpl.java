@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.integration.asset.core.toupdate.handler;
+package com.bootybanger.cryptobot.integration.asset.core.toupdate;
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetPair;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AssetSplitterImpl implements AssetSplitter {
     @Override
-    public Mono<Map<String, List<AssetPair>>> split(Mono<Map<String, Set<AssetDTO>>> assetMap) {
+    public Mono<Map<String, List<AssetPair>>> splitToPairs(Mono<Map<String, Set<AssetDTO>>> assetMap) {
         Map<String, List<AssetPair>> result = new ConcurrentHashMap<>();
         return assetMap.map(symbolDTOListMap -> symbolDTOListMap.values().stream()
                 .filter(assetDTOSet -> assetDTOSet.size() > 1)

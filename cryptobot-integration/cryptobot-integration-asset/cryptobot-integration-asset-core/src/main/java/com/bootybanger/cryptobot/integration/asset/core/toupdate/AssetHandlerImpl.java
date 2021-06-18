@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.integration.asset.core.toupdate.handler;
+package com.bootybanger.cryptobot.integration.asset.core.toupdate;
 
 import com.bootybanger.cryptobot.common.constant.dto.ArbitrageWindowDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
@@ -43,7 +43,7 @@ public class AssetHandlerImpl implements AssetHandler {
                         symbolDTOListMap.entrySet().stream()
                                 .filter(entry -> entry.getValue().size() < 2)
                                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
-        Mono<Map<String, List<AssetPair>>> assetPairMap = assetSplitter.split(activeAssetMap);
+        Mono<Map<String, List<AssetPair>>> assetPairMap = assetSplitter.splitToPairs(activeAssetMap);
         Mono<Map<String, List<ArbitrageWindowDTO>>> windows = arbitrageWindowFinder.findWindows(assetPairMap);
 
         windows.subscribe(symbolDTOListMap -> {
