@@ -13,5 +13,14 @@
     <artifactId>cryptobot-cache-asset-api</artifactId>
     <version>${revision}</version>
 
-    
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bootybanger</groupId>
+            <artifactId>cryptobot-cache-asset-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>
