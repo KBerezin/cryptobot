@@ -2,9 +2,8 @@ package com.bootybanger.cryptobot.integration.asset.core.toupdate.handler;
 
 import com.bootybanger.cryptobot.common.constant.dto.ArbitrageWindowDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetPair;
-import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.util.PriceMath;
-import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.handler.ArbitrageWindowFinder;
+import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.ArbitrageWindowFinder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -18,13 +17,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ArbitrageWindowFinderImpl implements ArbitrageWindowFinder {
     @Override
-    public Mono<Map<SymbolDTO, List<ArbitrageWindowDTO>>> findWindows(Mono<Map<SymbolDTO, List<AssetPair>>> assetPairMap) {
+    public Mono<Map<String, List<ArbitrageWindowDTO>>> findWindows(Mono<Map<String, List<AssetPair>>> assetPairMap) {
         return assetPairMap
                 .flatMap(this::findArbitrageWindows);
     }
 
-    private Mono<Map<SymbolDTO, List<ArbitrageWindowDTO>>> findArbitrageWindows(Map<SymbolDTO, List<AssetPair>> symbolDTOListMap) {
-        Map<SymbolDTO, List<ArbitrageWindowDTO>> result = new ConcurrentHashMap<>();
+    private Mono<Map<String, List<ArbitrageWindowDTO>>> findArbitrageWindows(Map<String, List<AssetPair>> symbolDTOListMap) {
+        Map<String, List<ArbitrageWindowDTO>> result = new ConcurrentHashMap<>();
         return Mono.just(symbolDTOListMap.values().stream()
                 .map(assetPairs ->
                         assetPairs.stream()
@@ -35,7 +34,7 @@ public class ArbitrageWindowFinderImpl implements ArbitrageWindowFinder {
                 .map(lists -> {
                     lists.stream()
                             .filter(list -> list.size() > 0)
-                            .forEach(list -> result.put(list.get(0).getAssetPair().getSymbolDTO(), list));
+                            .forEach(list -> result.put(list.get(0).getAssetPair().getSymbolDTO().getName(), list));
                     return result;
                 });
     }

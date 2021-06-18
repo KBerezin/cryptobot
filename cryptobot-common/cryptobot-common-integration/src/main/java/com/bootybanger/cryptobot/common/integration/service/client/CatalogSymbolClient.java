@@ -2,8 +2,8 @@ package com.bootybanger.cryptobot.common.integration.service.client;
 
 import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 
-import com.bootybanger.cryptobot.common.integration.client.CatalogBaseClient;
-import com.bootybanger.cryptobot.common.integration.config.properties.CatalogConfigurationProperties;
+import com.bootybanger.cryptobot.common.integration.client.InternalBaseClient;
+import com.bootybanger.cryptobot.common.integration.config.properties.internal.CatalogConfigurationProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ import java.util.List;
 public class CatalogSymbolClient {
 
     private final CatalogConfigurationProperties properties;
-    private final CatalogBaseClient client;
+    private final InternalBaseClient client;
 
     public Mono<Void> addSymbolList(List<SymbolDTO> symbolDTOList) {
         return client.postClient(properties.getBaseUrl(), symbolDTOList, new HashMap<>(), new HashMap<>(),

@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.common.integration.config.properties;
+package com.bootybanger.cryptobot.common.integration.config.properties.exchange;
 
 
 import com.bootybanger.cryptobot.common.integration.factory.YamlPropertyLoaderFactory;

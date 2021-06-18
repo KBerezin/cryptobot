@@ -2,7 +2,6 @@ package com.bootybanger.cryptobot.cache.asset.core.service;
 
 import com.bootybanger.cryptobot.cache.asset.core.domain.service.AssetCacheService;
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
-import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -15,14 +14,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class AssetCacheServiceImpl implements AssetCacheService {
-    private final Map<SymbolDTO, Set<AssetDTO>> assetMap = new ConcurrentHashMap<>();
+    private final Map<String, Set<AssetDTO>> assetMap = new ConcurrentHashMap<>();
 
     @Override
     public Mono<Void> put(List<AssetDTO> newAssets) {
         newAssets.forEach(assetDTO -> {
             Set<AssetDTO> newAssetDtoList = Collections.newSetFromMap(new ConcurrentHashMap<>());
             newAssetDtoList.add(assetDTO);
-            assetMap.merge(assetDTO.getSymbolDTO(), newAssetDtoList, (ns, os) -> {
+            assetMap.merge(assetDTO.getSymbolDTO().getName(), newAssetDtoList, (ns, os) -> {
                 os.addAll(ns);
                 return os;
             });
@@ -31,7 +30,7 @@ public class AssetCacheServiceImpl implements AssetCacheService {
     }
 
     @Override
-    public Mono<Map<SymbolDTO, Set<AssetDTO>>> getAssetMap() {
+    public Mono<Map<String, Set<AssetDTO>>> getAssetMap() {
         removeOldRecords();
         return Mono.just(Collections.unmodifiableMap(assetMap));
     }

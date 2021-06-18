@@ -10,3 +10,12 @@ catalog:
   coin:
     getAll: /coin/get/list/all
     addList: /coin/add/list
+
+cache:
+  baseUrl: http://localhost:8083/api/cache
+  assetCache:
+    getAll: /asset/get/all
+    addList: /asset/add/list
+  arbitrageWindowCache:
+    getAll:
+    addList:

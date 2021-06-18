@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 @Configuration
 @ComponentScan(basePackages = {
         "com.bootybanger.cryptobot.common.integration.service",
+        "com.bootybanger.cryptobot.common.integration.client",
         "com.bootybanger.cryptobot.integration.symbol.core",
         "com.bootybanger.cryptobot.integration.asset.core",
         "com.bootybanger.cryptobot.common.integration.config"

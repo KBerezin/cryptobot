@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.handler;
+package com.bootybanger.cryptobot.integration.asset.core.domain.toupdate;
 
 import com.bootybanger.cryptobot.common.constant.dto.ArbitrageWindowDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetPair;
@@ -9,5 +9,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface ArbitrageWindowFinder {
-    Mono<Map<SymbolDTO, List<ArbitrageWindowDTO>>> findWindows(Mono<Map<SymbolDTO, List<AssetPair>>> assetPairMap);
+    Mono<Map<String, List<ArbitrageWindowDTO>>> findWindows(Mono<Map<String, List<AssetPair>>> assetPairMap);
 }

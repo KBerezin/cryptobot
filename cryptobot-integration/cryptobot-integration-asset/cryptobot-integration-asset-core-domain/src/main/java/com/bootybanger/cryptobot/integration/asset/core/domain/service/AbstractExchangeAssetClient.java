@@ -3,7 +3,7 @@ package com.bootybanger.cryptobot.integration.asset.core.domain.service;
 import com.bootybanger.cryptobot.common.constant.dto.ExchangeAssetDTO;
 import com.bootybanger.cryptobot.common.integration.client.BaseClient;
 import com.bootybanger.cryptobot.common.integration.client.BitfinexBaseClient;
-import com.bootybanger.cryptobot.common.integration.config.properties.AssetProperties;
+import com.bootybanger.cryptobot.common.integration.config.properties.exchange.AssetProperties;
 import com.bootybanger.cryptobot.integration.asset.core.domain.util.AssetParseUtil;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;

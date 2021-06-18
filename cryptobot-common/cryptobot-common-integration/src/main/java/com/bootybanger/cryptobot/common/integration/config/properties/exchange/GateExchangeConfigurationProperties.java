@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.common.integration.config.properties;
+package com.bootybanger.cryptobot.common.integration.config.properties.exchange;
 
 
 import com.bootybanger.cryptobot.common.integration.factory.YamlPropertyLoaderFactory;
@@ -9,5 +9,5 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @ConfigurationProperties("gate")
 @PropertySource(value = "classpath:gate.yml", factory = YamlPropertyLoaderFactory.class)
-public class GateConfigurationProperties extends AbstractGeneralExchangeConfigurationProperties {
+public class GateExchangeConfigurationProperties extends AbstractGeneralExchangeConfigurationProperties {
 }

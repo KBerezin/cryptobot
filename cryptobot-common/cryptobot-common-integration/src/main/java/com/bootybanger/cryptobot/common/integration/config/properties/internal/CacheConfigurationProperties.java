@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.common.integration.config.properties;
+package com.bootybanger.cryptobot.common.integration.config.properties.internal;
 
 import com.bootybanger.cryptobot.common.integration.factory.YamlPropertyLoaderFactory;
 import jakarta.validation.constraints.NotBlank;
@@ -12,14 +12,14 @@ import org.springframework.context.annotation.PropertySource;
 import java.util.Map;
 
 @Configuration
-@ConfigurationProperties("catalog")
-@PropertySource(value = "classpath:catalog.yml", factory = YamlPropertyLoaderFactory.class)
+@ConfigurationProperties("cache")
+@PropertySource(value = "classpath:internal.yml", factory = YamlPropertyLoaderFactory.class)
 @Setter @Getter
-public class CatalogConfigurationProperties {
+public class CacheConfigurationProperties {
     @NotBlank
     private String baseUrl;
     @NotEmpty
-    private Map<String, String> symbol;
+    private Map<String, String> assetCache;
     @NotEmpty
-    private Map<String, String> coin;
+    private Map<String, String> arbitrageWindowCache;
 }

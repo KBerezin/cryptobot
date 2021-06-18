@@ -6,18 +6,19 @@
 
     <parent>
         <groupId>com.bootybanger</groupId>
-        <artifactId>cryptobot</artifactId>
+        <artifactId>cryptobot-microservice</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>cryptobot-microservice</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>cryptobot-microservice-cache</artifactId>
+    <packaging>jar</packaging>
+    <version>${revision}</version>
 
-    <modules>
-        <module>cryptobot-microservice-catalog</module>
-        <module>cryptobot-microservice-exchange-integration</module>
-        <module>cryptobot-microservice-cache</module>
-    </modules>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.bootybanger</groupId>
+            <artifactId>cryptobot-cache-asset-api</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

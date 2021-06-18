@@ -1,4 +1,4 @@
-package com.bootybanger.cryptobot.common.integration.config.properties;
+package com.bootybanger.cryptobot.common.integration.config.properties.exchange;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

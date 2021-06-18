@@ -1,7 +1,7 @@
 package com.bootybanger.cryptobot.integration.symbol.core.service.client;
 
 import com.bootybanger.cryptobot.common.constant.dto.CoinDTO;
-import com.bootybanger.cryptobot.common.integration.client.CoinMarketCapBaseClient;
+import com.bootybanger.cryptobot.common.integration.client.GeneralBaseClient;
 import com.bootybanger.cryptobot.common.integration.config.properties.CoinMarketCapConfigurationProperties;
 import core.util.CoinParseUtil;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.List;
 public class CoinMarketCapCoinClient {
 
     private final CoinMarketCapConfigurationProperties properties;
-    private final CoinMarketCapBaseClient client;
+    private final GeneralBaseClient client;
     private final CoinParseUtil parseUtil;
 
     public Mono<List<CoinDTO>> getAllCoins() {

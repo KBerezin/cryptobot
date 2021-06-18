@@ -1,6 +1,2 @@
 server:
   port: 8082
-
-binance:
-  baseUrl: https://api.binance.com
-

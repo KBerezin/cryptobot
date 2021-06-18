@@ -2,8 +2,7 @@ package com.bootybanger.cryptobot.integration.asset.core.toupdate.handler;
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetPair;
-import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
-import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.handler.AssetSplitter;
+import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.AssetSplitter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -19,8 +18,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AssetSplitterImpl implements AssetSplitter {
     @Override
-    public Mono<Map<SymbolDTO, List<AssetPair>>> split(Mono<Map<SymbolDTO, Set<AssetDTO>>> assetMap) {
-        Map<SymbolDTO, List<AssetPair>> result = new ConcurrentHashMap<>();
+    public Mono<Map<String, List<AssetPair>>> split(Mono<Map<String, Set<AssetDTO>>> assetMap) {
+        Map<String, List<AssetPair>> result = new ConcurrentHashMap<>();
         return assetMap.map(symbolDTOListMap -> symbolDTOListMap.values().stream()
                 .filter(assetDTOSet -> assetDTOSet.size() > 1)
                 .map(assetDTOSet -> {
@@ -38,7 +37,7 @@ public class AssetSplitterImpl implements AssetSplitter {
                 })
                 .collect(Collectors.toList()))
                 .map(lists -> {
-                    lists.forEach(assetPairs -> result.put(assetPairs.get(0).getSymbolDTO(), assetPairs));
+                    lists.forEach(assetPairs -> result.put(assetPairs.get(0).getSymbolDTO().getName(), assetPairs));
                     return result;
                 });
     }

@@ -3,13 +3,11 @@ package com.bootybanger.cryptobot.integration.asset.core.toupdate.handler;
 import com.bootybanger.cryptobot.common.constant.dto.ArbitrageWindowDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
 import com.bootybanger.cryptobot.common.constant.dto.AssetPair;
-import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.constant.util.PriceMath;
-import com.bootybanger.cryptobot.integration.asset.core.domain.service.AssetUpdateService;
-import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.asset.RealTimeAssetMonitoringService;
-import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.handler.ArbitrageWindowFinder;
-import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.handler.AssetHandler;
-import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.handler.AssetSplitter;
+import com.bootybanger.cryptobot.common.integration.service.cache.AssetCacheIntegrationService;
+import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.ArbitrageWindowFinder;
+import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.AssetHandler;
+import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.AssetSplitter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -27,10 +25,7 @@ import java.util.stream.Collectors;
 public class AssetHandlerImpl implements AssetHandler {
 
     @Autowired
-    RealTimeAssetMonitoringService realTimeAssetMonitoringService;
-
-    @Autowired
-    AssetUpdateService facadeAssetIntegrationService;
+    AssetCacheIntegrationService assetCacheIntegrationService;
 
     @Autowired
     AssetSplitter assetSplitter;
@@ -42,29 +37,29 @@ public class AssetHandlerImpl implements AssetHandler {
     @Scheduled(initialDelay = 15000, fixedDelay = 10000)
     public void handle() {
         System.out.println("запускаю обработку");
-        Mono<Map<SymbolDTO, Set<AssetDTO>>> activeAssetMap = realTimeAssetMonitoringService.getAssetMap();
+        Mono<Map<String, Set<AssetDTO>>> activeAssetMap = assetCacheIntegrationService.getAllAssets();
         activeAssetMap
                 .map(symbolDTOListMap ->
                         symbolDTOListMap.entrySet().stream()
                                 .filter(entry -> entry.getValue().size() < 2)
                                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
-        Mono<Map<SymbolDTO, List<AssetPair>>> assetPairMap = assetSplitter.split(activeAssetMap);
-        Mono<Map<SymbolDTO, List<ArbitrageWindowDTO>>> windows = arbitrageWindowFinder.findWindows(assetPairMap);
+        Mono<Map<String, List<AssetPair>>> assetPairMap = assetSplitter.split(activeAssetMap);
+        Mono<Map<String, List<ArbitrageWindowDTO>>> windows = arbitrageWindowFinder.findWindows(assetPairMap);
 
         windows.subscribe(symbolDTOListMap -> {
             System.out.println("-------------------------СТАРТ-------------------------");
-            Set<SymbolDTO> symbolDTOS = symbolDTOListMap.keySet();
-            symbolDTOS.forEach(symbolDTO -> {
-                if(!isExcluded(symbolDTO)) {
-                    List<ArbitrageWindowDTO> arbitrageWindowDTOList = symbolDTOListMap.get(symbolDTO);
+            Set<String> symbolNames = symbolDTOListMap.keySet();
+            symbolNames.forEach(symbolName -> {
+                if(!isExcluded(symbolName)) {
+                    List<ArbitrageWindowDTO> arbitrageWindowDTOList = symbolDTOListMap.get(symbolName);
                     arbitrageWindowDTOList.forEach(arbitrageWindowDTO -> {
                         double pctDiff = PriceMath.calculatePriceDifferencePct(arbitrageWindowDTO.getAssetPair().getBid(), arbitrageWindowDTO.getAssetPair().getAsk());
                         if (pctDiff > 0) {
-                            System.out.println("Symbol: " + symbolDTO.getName());
-                            System.out.println("ID: " + symbolDTO.getId());
-                            System.out.println("RANK: " + symbolDTO.getBaseAsset().getRank());
-                            System.out.println("NET: " + symbolDTO.getBaseAsset().getPlatform());
-                            System.out.println("Name: " + symbolDTO.getBaseAsset().getName());
+                            System.out.println("Symbol: " + symbolName);
+                            System.out.println("ID: " + arbitrageWindowDTO.getAssetPair().getSymbolDTO().getId());
+                            System.out.println("RANK: " + arbitrageWindowDTO.getAssetPair().getSymbolDTO().getBaseAsset().getRank());
+                            System.out.println("NET: " + arbitrageWindowDTO.getAssetPair().getSymbolDTO().getBaseAsset().getPlatform());
+                            System.out.println("Name: " + arbitrageWindowDTO.getAssetPair().getSymbolDTO().getBaseAsset().getName());
                             System.out.println("Можно купить на бирже: " + arbitrageWindowDTO.getAssetPair().getAskExchange());
                             System.out.println("ЗА: " + arbitrageWindowDTO.getAssetPair().getAsk());
                             System.out.println("Продать на бирже: " + arbitrageWindowDTO.getAssetPair().getBidExchange());
@@ -80,7 +75,7 @@ public class AssetHandlerImpl implements AssetHandler {
         });
     }
 
-    boolean isExcluded(SymbolDTO symbolDTO) {
+    boolean isExcluded(String symbolName) {
         List<String> strings = Arrays.asList(
                 //нет вывода или депозита
                 "CELO_USDT", "ROSE_USDT","BCHA_USDT", "SERO_USDT", "COCOS_USDT",
@@ -96,7 +91,7 @@ public class AssetHandlerImpl implements AssetHandler {
 
 
                 );
-        return strings.contains(symbolDTO.getName());
+        return strings.contains(symbolName);
     }
 }
 

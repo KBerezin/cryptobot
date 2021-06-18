@@ -1,9 +1,9 @@
 package com.bootybanger.cryptobot.integration.asset.core.toupdate;
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
+import com.bootybanger.cryptobot.common.integration.service.cache.AssetCacheIntegrationService;
 import com.bootybanger.cryptobot.integration.asset.core.domain.service.AssetUpdateService;
 import com.bootybanger.cryptobot.integration.asset.core.domain.service.ExchangeAssetIntegrationService;
-import com.bootybanger.cryptobot.integration.asset.core.domain.toupdate.asset.RealTimeAssetMonitoringService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class AssetUpdateServiceImpl implements AssetUpdateService {
 
-    private final RealTimeAssetMonitoringService realTimeAssetMonitoringService;
+    private final AssetCacheIntegrationService assetCacheIntegrationService;
     private final List<ExchangeAssetIntegrationService> assetIntegrationServiceList;
 
     @Override
@@ -35,6 +35,6 @@ public class AssetUpdateServiceImpl implements AssetUpdateService {
                     return assetDTOList;
                 }));
         Flux.fromStream(monoStream).flatMap(mono ->
-                mono.flatMap(realTimeAssetMonitoringService::put)).subscribe();
+                mono.flatMap(assetCacheIntegrationService::addAssetList)).subscribe();
     }
 }

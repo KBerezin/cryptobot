@@ -2,8 +2,8 @@ package com.bootybanger.cryptobot.common.integration.service.client;
 
 import com.bootybanger.cryptobot.common.constant.dto.CoinDTO;
 
-import com.bootybanger.cryptobot.common.integration.client.CatalogBaseClient;
-import com.bootybanger.cryptobot.common.integration.config.properties.CatalogConfigurationProperties;
+import com.bootybanger.cryptobot.common.integration.client.InternalBaseClient;
+import com.bootybanger.cryptobot.common.integration.config.properties.internal.CatalogConfigurationProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ import java.util.List;
 public class CatalogCoinClient {
 
     private final CatalogConfigurationProperties properties;
-    private final CatalogBaseClient client;
+    private final InternalBaseClient client;
 
     public Mono<Void> addCoinList(List<CoinDTO> coinDTOList) {
         return client.postClient(properties.getBaseUrl(), coinDTOList, new HashMap<>(), new HashMap<>(),
