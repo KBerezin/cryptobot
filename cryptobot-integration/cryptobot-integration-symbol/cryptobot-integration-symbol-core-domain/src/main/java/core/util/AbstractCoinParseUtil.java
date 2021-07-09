@@ -163,6 +163,7 @@ public abstract class AbstractCoinParseUtil implements CoinParseUtil {
         duplicateNameMap.put("mStable BTC", "MBTC1");
         duplicateNameMap.put("Lightstreams", "PHT1");
         duplicateNameMap.put("Unknown Fair Object", "UFO1");
+        duplicateNameMap.put("The Truth", "UFO2");
         duplicateNameMap.put("Relevant", "REL1");
         duplicateNameMap.put("Unobtanium", "UNO1");
         duplicateNameMap.put("CURE Farm", "CURE1");
@@ -182,7 +183,9 @@ public abstract class AbstractCoinParseUtil implements CoinParseUtil {
         duplicateNameMap.put("Bat True Share", "BTS1");
         duplicateNameMap.put("YouSwap", "YOU1");
         duplicateNameMap.put("Etheroll", "DICE1");
+        duplicateNameMap.put("LavaCake Finance", "LAVA1");
         duplicateNameMap.put("TRONbetDice", "DICE2");
+        duplicateNameMap.put("Metahero", "HERO1");
         duplicateNameMap.put("Bitalgo", "ALG1");
         duplicateNameMap.put("Crudeoil Finance", "OIL1");
         duplicateNameMap.put("Karma DAO", "KARMA1");
@@ -394,6 +397,7 @@ public abstract class AbstractCoinParseUtil implements CoinParseUtil {
         duplicateNameMap.put("Moms I'd Like to Fund", "MILF1");
         duplicateNameMap.put("Digital Gold", "GOLD1");
         duplicateNameMap.put("Golden Token", "GOLD2");
+        duplicateNameMap.put("GoldFarm", "GOLD3");
         duplicateNameMap.put("Fitmin Finance", "FTM1");
         duplicateNameMap.put("Metacoin", "MTC1");
         duplicateNameMap.put("Epanus", "EPS1");
@@ -529,6 +533,7 @@ public abstract class AbstractCoinParseUtil implements CoinParseUtil {
         duplicateNameMap.put("Ternio", "TERN1");
         duplicateNameMap.put("Tapcoin", "TTT1");
         duplicateNameMap.put("FileStar", "STAR1");
+        duplicateNameMap.put("Pornstar", "STAR2");
         duplicateNameMap.put("Trinity Network Credit", "TNC1");
         duplicateNameMap.put("GoNetwork", "GOT1");
         duplicateNameMap.put("GOT Token", "GOT2");
@@ -568,6 +573,33 @@ public abstract class AbstractCoinParseUtil implements CoinParseUtil {
         duplicateNameMap.put("Mrweb Finance", "AMA1");
         duplicateNameMap.put("IRON Titanium Token", "TITAN1");
         duplicateNameMap.put("Bitcoin Networks", "BTCN1");
+        duplicateNameMap.put("Dot Finance", "PINK1");
+        duplicateNameMap.put("ARCx (old)", "ARC1");
+        duplicateNameMap.put("HitBTC Token", "HIT1");
+        duplicateNameMap.put("One Token", "ONE2");
+        duplicateNameMap.put("Bitfresh", "BFT2");
+        duplicateNameMap.put("Starter", "START1");
+        duplicateNameMap.put("ShieldEX", "SLD1");
+        duplicateNameMap.put("Gastrocoin", "GTC2");
+        duplicateNameMap.put("Saturna", "SAT2");
+        duplicateNameMap.put("SpaceGoat", "SGT2");
+        duplicateNameMap.put("SupremeX", "SXC1");
+        duplicateNameMap.put("BitClout", "CLOUT3");
+        duplicateNameMap.put("ButterSwap", "BUTTER1");
+        duplicateNameMap.put("GEM PROTOCOL", "GEM1");
+        duplicateNameMap.put("Modern Liquidity Token", "MLT1");
+        duplicateNameMap.put("Global Adversity Project", "GAP1");
+        duplicateNameMap.put("CBD Coin", "CBD1");
+        duplicateNameMap.put("PorkSwap", "PSWAP1");
+        duplicateNameMap.put("Micro Gaming Protocol", "MGP1");
+        duplicateNameMap.put("TacoCat Token", "TCT1");
+        duplicateNameMap.put("Crossing the Yellow Blocks", "CBK1");
+        duplicateNameMap.put("BERNARD", "BERN1");
+        duplicateNameMap.put("Sonar", "PING1");
+
+
+//
+
         String alternativeSymbol = duplicateNameMap.get(coinDTO.getName());
         if (alternativeSymbol != null) {
             coinDTO.setSymbol(alternativeSymbol);

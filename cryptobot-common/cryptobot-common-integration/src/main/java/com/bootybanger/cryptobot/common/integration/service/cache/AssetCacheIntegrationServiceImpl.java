@@ -1,7 +1,6 @@
 package com.bootybanger.cryptobot.common.integration.service.cache;
 
 import com.bootybanger.cryptobot.common.constant.dto.AssetDTO;
-import com.bootybanger.cryptobot.common.constant.dto.SymbolDTO;
 import com.bootybanger.cryptobot.common.integration.service.client.CacheAssetClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
